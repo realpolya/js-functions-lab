@@ -1,4 +1,6 @@
 
+console.log("================ CODE WARS ==============")
+
 /*Write a function that takes in a string of one or 
 more words, and returns the same string, but with 
 all words that have five or more letters reversed 
@@ -13,7 +15,6 @@ function spinWords(string){
     
     // separating words
     const separateWords = string.split(" ");
-    console.log(separateWords.length);
     
     // assessing length of each words through loop inside the array
     for (let i = 0; i < separateWords.length; i++) {
@@ -24,18 +25,15 @@ function spinWords(string){
         let word = separateWords[i].split("");
         word.reverse()
         let newWord = word.join("");
-        console.log(newWord);
         outcome.splice(i, 0, newWord);
       } else {
         //outcome[i].push(separateWords[i]);
         outcome.splice(i, 0, separateWords[i])
-        console.log(outcome);
       }
     }
     
     // joining back into a single string
     let finalString = outcome.join(" ");
-    console.log(finalString);
     return finalString;
   }
   
@@ -47,8 +45,6 @@ function spinWords(string){
 /* Complete the solution so that it returns true if the first argument(string)
  passed in ends with the 2nd argument (also a string).*/
 
-console.log("================ CODE WARS ==============")
-
 function solution(str, ending){
     // lengths of strings
     let x = str.length;
@@ -58,14 +54,11 @@ function solution(str, ending){
     strArray = str.split("");
     endingArray = ending.split("");
 
-    if (x >= y) {
-      console.log(x, y);  
+    if (x >= y) { 
       for (let i = 0; i < y; i++) {
 
         // use reverse method
         if (strArray.reverse()[i] === endingArray.reverse()[i]) {
-            console.log(strArray.reverse()[i]);
-            console.log(endingArray.reverse()[i]);
         } else {
           return false;
         }
@@ -150,40 +143,36 @@ function isValid(formula){
     } else {
       
       // material5 and material6 must be selected at the same time
-      if (formula.includes(5)) {
-        
-        if (formula.includes(6)) {
+      if (formula.includes(5) && formula.includes(6)) {
 
-          // material7 or  material8 must be selected(at least one, or both)
-          if (formula.includes(7) || formula.includes(8)) {
-          
-            return true;
-            
-          } else {
-          
-            return false;
-          
-          }
-
-        } else {
-        
-          return false;
-
-        }
-        
-      } else {
-        
         // material7 or  material8 must be selected(at least one, or both)
         if (formula.includes(7) || formula.includes(8)) {
           
           return true;
-          
+            
         } else {
-        
+          
           return false;
-        
+          
         }
-        
+          
+      } else if (!formula.includes(5) && !formula.includes(6)) {
+
+        // material7 or  material8 must be selected(at least one, or both)
+        if (formula.includes(7) || formula.includes(8)) {
+          
+          return true;
+            
+        } else {
+          
+          return false;
+          
+        }
+
+      } else {
+          
+          return false;
+          
       }
       
     }
@@ -192,9 +181,12 @@ function isValid(formula){
   
 }
 
+
 console.log(isValid([1,3,7]));
 console.log(isValid([7,1,2,3]));
 console.log(isValid([1,3,5,7])); 
 console.log(isValid([1,5,6,7,3])); 
-console.log(isValid([2,5,8,7,4,6]));
-console.log(isValid([3,7]));
+console.log(isValid([5,6,7]));
+console.log(isValid([5,6,7,8]));
+console.log(isValid([6,7,8]));
+console.log(isValid([7,8]));
