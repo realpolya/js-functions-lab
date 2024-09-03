@@ -115,3 +115,86 @@ function squareDigits(num){
   }
 
 console.log(squareDigits(9119));
+
+
+
+
+
+// Simple Fun #352: Reagent Formula
+
+function isValid(formula){
+  //coding and coding..
+  
+  /* rules:
+  material1 and material2 cannot be selected at the same time
+  material3 and material4 cannot be selected at the same time
+  material5 and material6 must be selected at the same time
+  material7 or  material8 must be selected(at least one, or both)
+  */
+  
+  // formula is an array of numbers
+  console.log(formula);
+  
+  // material1 and material2 cannot be selected at the same time
+  if (formula.includes(1) && formula.includes(2)) {
+    
+    return false;
+    
+  } else {
+    
+    // material3 and material4 cannot be selected at the same time
+    if (formula.includes(3) && formula.includes(4)) {
+      
+      return false;
+      
+    } else {
+      
+      // material5 and material6 must be selected at the same time
+      if (formula.includes(5)) {
+        
+        if (formula.includes(6)) {
+
+          // material7 or  material8 must be selected(at least one, or both)
+          if (formula.includes(7) || formula.includes(8)) {
+          
+            return true;
+            
+          } else {
+          
+            return false;
+          
+          }
+
+        } else {
+        
+          return false;
+
+        }
+        
+      } else {
+        
+        // material7 or  material8 must be selected(at least one, or both)
+        if (formula.includes(7) || formula.includes(8)) {
+          
+          return true;
+          
+        } else {
+        
+          return false;
+        
+        }
+        
+      }
+      
+    }
+    
+  }
+  
+}
+
+console.log(isValid([1,3,7]));
+console.log(isValid([7,1,2,3]));
+console.log(isValid([1,3,5,7])); 
+console.log(isValid([1,5,6,7,3])); 
+console.log(isValid([2,5,8,7,4,6]));
+console.log(isValid([3,7]));
