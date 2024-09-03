@@ -190,3 +190,76 @@ console.log(isValid([5,6,7]));
 console.log(isValid([5,6,7,8]));
 console.log(isValid([6,7,8]));
 console.log(isValid([7,8]));
+
+
+
+// array Diff 
+console.log("====================CODE WARS: ARRAY DIFF======================");
+
+function arrayDiff(a, b) {
+  
+  // new array initialize
+  const result = [];
+  
+  // repetitive taboo
+  const taboo = [];
+  
+  // nested functions
+  // cycle through the first array
+  for (let i = 0; i < a.length; i++) {
+    
+    if (b.length === 0) {
+      
+      result.push(a[i]);
+      console.log("array b is empty");
+      
+    }
+    
+    // cycle through the second array within the first
+    for (let y = 0; y < b.length; y++) {
+      
+      // compare the two values a[0] and b[0]
+      if (a[i] !== b[y]) {
+        
+        result.push(a[i]);
+        console.log(a[i] + " added to result");
+        
+      } else {
+        
+        taboo.push(a[i]);
+        console.log(a[i] + " added to taboo");
+        
+      }
+      
+    }
+    
+  }
+  
+  // if anything is within taboo, remove from result
+  
+  console.log("taboo is ", taboo);
+  console.log("result is ", result);
+  
+  for (let i = 0; i < result.length; i++) {
+    
+    console.log(i);
+    
+    //compare taboo with result
+    if (b.includes(result[i])) {
+      
+      console.log(result[i] + " has been removed");
+      result.splice(i, 1);
+      i = -1;
+      console.log(i);
+      
+    }
+    
+  }
+  
+  return result;
+  
+}
+
+console.log(arrayDiff([1,2,2,2,3],[2]));
+console.log(arrayDiff([1,2,2],[]));
+console.log(arrayDiff([1,2,3],[1,2]));
