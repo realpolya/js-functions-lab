@@ -48,9 +48,11 @@ const winCombos = [
 
 const board = [];
 let turn = "X";
+let winXO;
 let winner = false;
 let tie = false;
 let boxChoice;
+let winColor = "white";
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -58,15 +60,17 @@ const resetButton = document.getElementById('reset')
 
 const sqrEls = document.querySelectorAll('.sqr');
 const messageEl = document.getElementById('message');
+const boardEl = document.querySelector('.board');
 
 /*-------------------------------- Functions --------------------------------*/
 
-
+// renders info to page
 const render = () => {
     updateBoard();
     updateMessage();
 }
 
+// render board
 const updateBoard = () => {
     // update each cell
     let i = 0;
@@ -76,37 +80,122 @@ const updateBoard = () => {
     });
 }
 
+// update message
 const updateMessage = () => {
     if (winner === false && tie === false) {
-        messageEl.textContent = `It is ${turn}'s now`;
+        messageEl.textContent = `It is ${turn}'s turn now`;
     } else if (tie === true) {
         messageEl.textContent = 'It is a tie';
-    } else {
-        messageEl.textContent = 'We have a winner';
+    } else if (winner === true) {
+        messageEl.textContent = `We have a winner: ${winXO}!!!`;
     }
 }
 
+// handle click, add square to the array
 const handleClick = (e) => {
+    console.log("CLick is clicked");
+
     boxChoice = e.target.id;
 
-    if (e.target.classList.contains("sqr")) {
+    if (e.target.classList.contains("sqr") && e.target.style.backgroundColor !== "lemonchiffon") {
+        // assign turn to box
+        board[boxChoice] = turn;
+
+        // change turn
+        changeXO();
+
+        // change color of that box
+        // if already won / tie, no need to change color
+        if (winner || tie) {
+            console.log("winner is ", winner);
+        } else {
+            e.target.style.backgroundColor = "lemonchiffon";
+        }
 
     } else {
         console.log("click did not target a square");
     }
 
+    // check for winner
+    checkForWinner();
+
+    // check for tie;
+    checkForTie();
+
+    freeze();
+
+    render();
 }
 
+// check for winner
+const checkForWinner = () => {
+    winCombos.forEach((combo) => {
+        let a = board[combo[0]];
+        let b = board[combo[1]];
+        let c = board[combo[2]];
+
+        if (a !== undefined && a === b && a === c) {
+            console.log("found a winner")
+            winner = true;
+            winXO = a;
+
+            // change color of the winning combo
+            combo.forEach((digit) => {
+                sqrEls[digit].style.backgroundColor = winColor;
+            })
+
+        } 
+    });
+}
+
+// change for tie
+const checkForTie = () => {
+    checkForWinner();
+    if (winner) {
+        console.log("winner is found");
+    } else if (board.includes(undefined) || board.length < 9) {
+        console.log("game is still being played");
+    } else {
+        tie = true;
+        console.log("tie is set to true");;
+    }
+}
+
+// change turn
+const changeXO = () => {
+    if (turn === "X") {
+        turn = "O";
+    } else if (turn === "O") {
+        turn = "X";
+    }
+}
+
+// render page
 const init = () => {
     console.log("The app loads");
     render();
 }
-init();
 
+// clear game
+const clear = () => {
+    board.length = 0;
+    location.reload();
+}
+
+// freeze object after win / tie
+const freeze = () => {
+    if (winner || tie) {
+        Object.freeze(board);
+        sqrEls.forEach((sqr) => {
+            sqr.disabled = true;
+        })
+    }
+}
 
 /*----------------------------- Event Listeners -----------------------------*/
 
-
-//sqrEls.addEventListener('click', handleClick());
+init();
+boardEl.addEventListener('click', handleClick);
+resetButton.addEventListener('click', clear);
 
 

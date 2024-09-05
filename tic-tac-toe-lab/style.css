@@ -29,6 +29,10 @@ body {
     background-color: thistle;
   }
 
+  .sqr:hover {
+    cursor: pointer;
+  }
+
   .playwrite {
     font-family: "Playwrite CU", system-ui;
     font-optical-sizing: auto;
