@@ -38,6 +38,7 @@ body {
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
+    font-size: 50px;
   }
 
   #message {
@@ -46,4 +47,16 @@ body {
 
   #reset:hover {
     background-color:thistle;
+  }
+
+  .yell {
+    color: lemonchiffon;
+  }
+
+  .whity {
+    color: white;
+  }
+
+  .purply {
+    color: lightcyan;
   }

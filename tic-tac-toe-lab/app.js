@@ -47,12 +47,19 @@ const winCombos = [
 /*---------------------------- Variables (state) ----------------------------*/
 
 const board = [];
-let turn = "X";
+let X = "❌";
+let O = "⭕";
+let turn = X;
 let winXO;
 let winner = false;
 let tie = false;
 let boxChoice;
-let winColor = "white";
+
+//colors
+let winColorX = "lavenderblush"; 
+let winColorO = "lightcyan";
+let changeColor = "lemonchiffon";
+let tieColor = "oldlace";
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -66,6 +73,7 @@ const boardEl = document.querySelector('.board');
 
 // renders info to page
 const render = () => {
+    console.log("The app loads");
     updateBoard();
     updateMessage();
 }
@@ -87,7 +95,7 @@ const updateMessage = () => {
     } else if (tie === true) {
         messageEl.textContent = 'It is a tie';
     } else if (winner === true) {
-        messageEl.textContent = `We have a winner: ${winXO}!!!`;
+        messageEl.textContent = `We have a winner: ${winXO}!`;
     }
 }
 
@@ -97,7 +105,8 @@ const handleClick = (e) => {
 
     boxChoice = e.target.id;
 
-    if (e.target.classList.contains("sqr") && e.target.style.backgroundColor !== "lemonchiffon") {
+    if (e.target.classList.contains("sqr") && e.target.style.backgroundColor !== changeColor) {
+        
         // assign turn to box
         board[boxChoice] = turn;
 
@@ -109,7 +118,7 @@ const handleClick = (e) => {
         if (winner || tie) {
             console.log("winner is ", winner);
         } else {
-            e.target.style.backgroundColor = "lemonchiffon";
+            e.target.style.backgroundColor = changeColor;
         }
 
     } else {
@@ -141,7 +150,11 @@ const checkForWinner = () => {
 
             // change color of the winning combo
             combo.forEach((digit) => {
-                sqrEls[digit].style.backgroundColor = winColor;
+                if (a === X) {
+                    sqrEls[digit].style.backgroundColor = winColorX;
+                } else if (a === O) {
+                    sqrEls[digit].style.backgroundColor = winColorO;
+                }
             })
 
         } 
@@ -157,23 +170,20 @@ const checkForTie = () => {
         console.log("game is still being played");
     } else {
         tie = true;
-        console.log("tie is set to true");;
+        console.log("tie is set to true");
+        sqrEls.forEach((sqr) => {
+            sqr.style.backgroundColor = tieColor;
+        })
     }
 }
 
 // change turn
 const changeXO = () => {
-    if (turn === "X") {
-        turn = "O";
-    } else if (turn === "O") {
-        turn = "X";
+    if (turn === X) {
+        turn = O;
+    } else if (turn === O) {
+        turn = X;
     }
-}
-
-// render page
-const init = () => {
-    console.log("The app loads");
-    render();
 }
 
 // clear game
@@ -194,7 +204,10 @@ const freeze = () => {
 
 /*----------------------------- Event Listeners -----------------------------*/
 
-init();
+window.onload = () => {
+    render();
+}
+
 boardEl.addEventListener('click', handleClick);
 resetButton.addEventListener('click', clear);
 
