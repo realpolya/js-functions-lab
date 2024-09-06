@@ -194,15 +194,29 @@ console.log(isValid([7,8]));
 
 
 // array Diff 
+/* INSTRUCTIONS
+Your goal in this kata is to implement a difference function, 
+which subtracts one list from another and returns the result.
+
+It should remove all values from list a, which are present 
+in list b keeping their order.
+
+arrayDiff([1,2],[1]) == [2]
+
+If a value is present in b, all of its occurrences must be 
+removed from the other:
+
+arrayDiff([1,2,2,2,3],[2]) == [1,3]
+ */
 console.log("====================CODE WARS: ARRAY DIFF======================");
 
 function arrayDiff(a, b) {
   
   // new array initialize
   const result = [];
-  
-  // repetitive taboo
-  const taboo = [];
+
+  // desired length
+  let finalLength = a.length // maximum possible length
   
   // nested functions
   // cycle through the first array
@@ -213,49 +227,20 @@ function arrayDiff(a, b) {
       result.push(a[i]);
       console.log("array b is empty");
       
+    } else if (b.includes(a[i])) {
+
+      // if subset b includes a, remove it from result
+      console.log(`${a[i]} is included in ${b}, it is removed`)
+
+    } else {
+
+      result.push(a[i]);
+
     }
-    
-    // cycle through the second array within the first
-    for (let y = 0; y < b.length; y++) {
-      
-      // compare the two values a[0] and b[0]
-      if (a[i] !== b[y]) {
-        
-        result.push(a[i]);
-        console.log(a[i] + " added to result");
-        
-      } else {
-        
-        taboo.push(a[i]);
-        console.log(a[i] + " added to taboo");
-        
-      }
-      
-    }
-    
+
   }
-  
-  // if anything is within taboo, remove from result
-  
-  console.log("taboo is ", taboo);
+
   console.log("result is ", result);
-  
-  for (let i = 0; i < result.length; i++) {
-    
-    console.log(i);
-    
-    //compare taboo with result
-    if (b.includes(result[i])) {
-      
-      console.log(result[i] + " has been removed");
-      result.splice(i, 1);
-      i = -1;
-      console.log(i);
-      
-    }
-    
-  }
-  
   return result;
   
 }
