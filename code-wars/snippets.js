@@ -248,3 +248,54 @@ function arrayDiff(a, b) {
 console.log(arrayDiff([1,2,2,2,3],[2]));
 console.log(arrayDiff([1,2,2],[]));
 console.log(arrayDiff([1,2,3],[1,2]));
+
+
+// digital root
+/* INSTRUCTIONS
+Digital root is the recursive sum of all the digits in a number.
+
+Given n, take the sum of the digits of n. If that value has more 
+than one digit, continue reducing in this way until a single-digit 
+number is produced. The input will be a non-negative integer.
+
+    16  -->  1 + 6 = 7
+   942  -->  9 + 4 + 2 = 15  -->  1 + 5 = 6
+132189  -->  1 + 3 + 2 + 1 + 8 + 9 = 24  -->  2 + 4 = 6
+493193  -->  4 + 9 + 3 + 1 + 9 + 3 = 29  -->  2 + 9 = 11  -->  1 + 1 = 2
+
+ */
+
+console.log("====================CODE WARS: DIGITAL ROOT======================");
+
+function digitalRoot(n) {
+  // define final sum
+  let finalSum = 0;
+
+  // break the n down to digits array
+  const nArray = n.toString().split('');
+
+  // create loop for array adding all to final sum
+  nArray.forEach((nu) => {
+    finalSum += +nu;
+  })
+
+  // break down the final sum into an array
+  const newArray = finalSum.toString().split('');
+
+  // if length of the final array is larger than 1
+  if (newArray.length > 1) {
+
+    // call the same function – must return for recursive function
+    const x = finalSum
+    return digitalRoot(x);
+
+  } else if (newArray.length === 1) {
+
+    return finalSum;
+    
+  }
+}
+
+digitalRoot(908);
+console.log(digitalRoot(493193));
+console.log(digitalRoot(456));
