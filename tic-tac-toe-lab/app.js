@@ -47,8 +47,8 @@ const winCombos = [
 /*---------------------------- Variables (state) ----------------------------*/
 
 const board = [];
-let X = "❌";
-let O = "⭕";
+let X = "❌"; //✖️❎
+let O = "⚪"; //⭕🔘⚪
 let turn = X;
 let winXO;
 let winner = false;

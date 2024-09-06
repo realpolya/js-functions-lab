@@ -125,9 +125,6 @@ function isValid(formula){
   material7 or  material8 must be selected(at least one, or both)
   */
   
-  // formula is an array of numbers
-  console.log(formula);
-  
   // material1 and material2 cannot be selected at the same time
   if (formula.includes(1) && formula.includes(2)) {
     
@@ -182,15 +179,6 @@ function isValid(formula){
 }
 
 
-console.log(isValid([1,3,7]));
-console.log(isValid([7,1,2,3]));
-console.log(isValid([1,3,5,7])); 
-console.log(isValid([1,5,6,7,3])); 
-console.log(isValid([5,6,7]));
-console.log(isValid([5,6,7,8]));
-console.log(isValid([6,7,8]));
-console.log(isValid([7,8]));
-
 
 
 // array Diff 
@@ -225,7 +213,6 @@ function arrayDiff(a, b) {
     if (b.length === 0) {
       
       result.push(a[i]);
-      console.log("array b is empty");
       
     } else if (b.includes(a[i])) {
 
@@ -292,7 +279,7 @@ function digitalRoot(n) {
   } else if (newArray.length === 1) {
 
     return finalSum;
-    
+
   }
 }
 
