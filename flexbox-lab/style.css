@@ -58,6 +58,9 @@
   main {
     background-color: white;
     padding: 32px 72px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
   }
   
   nav button {
@@ -80,10 +83,22 @@
   
   .card-footer {
     font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: right;
   }
   
   .card-footer * {
     margin-top: 8px;
+  }
+
+  .card-footer p {
+    display: flex;
+    align-items: end;
+  }
+
+  .card {
+    margin: .1rem;
   }
   
   #subnav {
