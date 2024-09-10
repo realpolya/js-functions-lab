@@ -322,8 +322,110 @@ let commentById = {}
 
 // Complete the exercise in the space below:
 
-
+commentById = comments.find((comment) => {
+    return comment.id === 823423;
+})
 
 // Check your work:
 console.log('Exercise 8 my result: ', commentById)
 console.log('Exercise 8 correct result: ', { text: 'Super good', id: 823423 })
+
+
+/*
+Exercise 9: Array.prototype.findIndex()
+
+Determine the index of the comment that has a specific ID 123523 in an array 
+of comment objects.
+
+- Store the index in the variable 'idx'.
+*/
+
+let idx = null
+
+// Complete the exercise in the space below:
+
+idx = comments.findIndex((comment) => {
+    return comment.id === 123523;
+})
+
+// Check your work:
+console.log('Exercise 9 my result: ', idx)
+console.log('Exercise 9 correct result: ', 3)
+
+
+/*
+Level Up exercise 1: Array.prototype.reduce()
+
+Calculate the combined lifespan of all the inventors using 
+Array.prototype.reduce()
+
+- Each object in the array includes these properties: 
+  'first', 'last', 'year' (birth year), and 'passed' (year of death).
+- Use the Array.prototype.reduce() method to calculate the sum of the total 
+  years lived by all the inventors.
+- Store the total sum in the variable 'totalYearsLived'.
+
+Hints:
+
+- Inside the reduce callback function, calculate the lifespan of each inventor 
+  (passed - year).
+- Accumulate this lifespan in the 'totalYearsLived' variable.
+- Remember, reduce takes a callback function and an initial value for the 
+  accumulator.
+*/
+
+let totalYearsLived = 0
+
+// Complete the exercise in the space below:
+
+totalYearsLived = inventors.reduce((acc, inventor) => {
+    let life = inventor.passed - inventor.year;
+    return acc + life;
+}, 0)
+
+// Check your work:
+console.log('Level Up 1 my result: ', totalYearsLived)
+console.log('Level Up 1 correct result: ', 861)
+
+
+/*
+Level Up exercise 2: Array.prototype.reduce()
+
+Tallying travel methods using Array.prototype.reduce(). 
+
+Count the number of times each travel method appears in the 'travelMethods'
+array.
+
+- The resulting object should have keys as the travel methods 
+  ('car', 'truck', 'bike', etc.) and values as their respective counts.
+- Store this object in the variable 'travelMethodCounts'.
+
+Hints:
+- Inside the reduce function, check if the travel method already exists as a key
+  in your accumulator object. If it does, increment its count. If not, add it 
+  to the object and give it a value of 1.
+- Since you want to return an object, be sure to pass an empty {} for the 
+  initial value of the "accumulator".
+*/
+
+let travelMethodCounts = {}
+
+// Complete the exercise in the space below:
+// const travelMethods = [
+//  'car', 'car', 
+
+travelMethodCounts = travelMethods.reduce((acc, tMethod) => {
+    if (acc[tMethod]) {
+        acc[tMethod]++;
+    } else {
+        acc[tMethod] = 1;
+    }
+    return acc;
+}, {});
+
+// Check your work:
+console.log('Level Up 2 my result: ', travelMethodCounts)
+console.log(
+  'Level Up 2 correct result: ', 
+  { car: 5, truck: 3, bike: 2, walk: 2, van: 2 }
+)
