@@ -77,36 +77,41 @@
   .img-placeholder {
     width: 355px;
     height: 270px;
-    background-color: gray;
+    background-color: rgb(249, 218, 223);
     border-radius: 8px;
+    border: 1px solid hotpink;
   }
   
+  /* card itself which is parent to 2 divs */
+  .card {
+    margin: .1rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* parent to h3 and p */
   .card-footer {
     font-size: 14px;
     display: flex;
     justify-content: space-between;
-    align-items: right;
-  }
-  
-  .card-footer * {
-    margin-top: 8px;
+    margin-top: 3px;
+    display: flex;
+    align-content: start;
   }
 
+  /* p within the card-footer */
   .card-footer p {
     display: flex;
-    align-items: end;
-  }
-
-  .card {
-    margin: .1rem;
+    align-items: center;
+    margin: 0;
   }
   
   #subnav {
     padding: 32px 72px 0;
-    background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: white;
   }
   
   #subnav button {
