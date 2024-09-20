@@ -284,5 +284,4 @@ function digitalRoot(n) {
 }
 
 digitalRoot(908);
-console.log(digitalRoot(493193));
-console.log(digitalRoot(456));
+console.log(digitalRoot(25111996));
