@@ -5,16 +5,6 @@ import morgan from "morgan";
 const app = express()
 app.use(morgan('dev'));
 
-//console.log(app)
-
-/* TO REACH: localhost:3000
-
-set event listener for server
-app.listen(arg1, arg2)
-arg1 = port
-arg2 = callback function
-*/
-
 app.listen(3000, () => {
     console.log("Listening on port 3000!!");
 });
@@ -54,7 +44,6 @@ const collectibles = [
 app.get("/collect/:index", (req, res) => {
     
     let i = +req.params.index
-    console.log(typeof(i))
 
     if (i < collectibles.length) {
         
@@ -82,36 +71,81 @@ const shoes = [
     { name: "Fifty-Inch Heels", price: 175, type: "heel" }
 ];
 
-// ?param=something&param=something
-// http://localhost:3000/hello?name=Polya&age=27
 app.get("/shoes", (req, res) => {
 
     let finalArr = [];
 
-    let toPrintMin = [];
-    let toPrintMax = []; 
-    let typeArray = [];
+    let minPrice;
+    let maxPrice;
+    let shoeType;
+
+    let finalString;
 
     // access query params
-    const minPrice = req.query.min-price;
-    const maxPrice = req.query.max-price;
-    const shoeType = req.query.type;
+    if (req.query.minprice) {
+        minPrice = +req.query.minprice;
+    }
+    if (req.query.maxprice) {
+        maxPrice = +req.query.maxprice;
+    }
+    if (req.query.type) {
+        shoeType = req.query.type;
+    }
 
-    shoes.forEach((shoe) => {
-        if (shoe.price > minPrice) {
-            toPrintMin.push(shoe)
-        }
+    // filtering the array three times
+    finalArr = shoes.filter((shoe) => {
+        
+        if (minPrice) {
+            return shoe.price >= minPrice;
+        } else { return shoe };
 
-        if (shoe.price < maxPrice) {
-            toPrintMax.push(shoe)
-        }
+    }).filter((shoe) => {
 
-        if (shoeType === shoe.type) {
-            typeArray.push(shoe);
-        }
+        if (maxPrice) {
+            return shoe.price <= maxPrice;
+        } else { return shoe };
+        
+
+    }).filter((shoe) => {
+        
+        if (shoeType) {
+            return shoeType === shoe.type;
+        } else { return shoe };
     })
 
-    finalArr.push()
+    // if search was not matched
+    if (finalArr.length === 0 && (minPrice || maxPrice || shoeType)) {
+        finalString = '<li style="color: red;">Nothing matched your search.</li>'
+    } // if nothing was passed as query
+    else if (finalArr.length === 0) {
+        shoes.forEach((shoe) => {
+            finalArr.push(shoe);
+        })
+    }
+    
+    // create final string with <li>
+    if (!finalString) {
+        finalString = finalArr.map((obj) => {
+            return `<li style="color: mediumseagreen;">${obj.type}s ${obj.name} for ${obj.price} USD</li>`
+        })
 
+        finalString = finalString.join('')
+    }
+
+    // send
+    res.send(`<h1 style="color: hotpink;">Your results include:</h1>
+        <ul style="color: mediumseagreen;">${finalString}</ul>
+        `);
 
 })
+
+/* TEST:
+
+http://localhost:3000/shoes?type=sandal
+http://localhost:3000/shoes?type=sandal&minprice=25
+http://localhost:3000/shoes?type=sandal&minprice=500&maxprice=70
+http://localhost:3000/shoes?type=heel&minprice=100
+http://localhost:3000/shoes?maxprice=500&minprice=25
+http://localhost:3000/shoes
+http://localhost:3000/shoes?type=super
+*/
