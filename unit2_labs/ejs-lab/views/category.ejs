@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=S, initial-scale=1.0">
+    <title><%= category %></title>
+</head>
+<body style="padding:2rem;">
+    <%- include('./partials/nav') %>
+    <h2 style="text-align: center; padding: 1rem 0 0 0;"><%= category %></h2>
+    <section style="padding:1rem;">
+        <%  items.forEach((item) => { %>
+            <h6 style="color:green;font-size: 1.3rem; margin:1rem 0 0 0;">
+                <%= item.name %>
+            </h6>
+            <ul style="margin: 0;">
+                <li>
+                    Price: <%= item.price %>
+                </li>
+                <li>
+                    Rating: <%= item.rating %>
+                </li>
+                <li>
+                    Description: <%= item.details %>
+                </li>
+            </ul>
+        <%
+        }); %>
+    </section>
+</body>
+</html>

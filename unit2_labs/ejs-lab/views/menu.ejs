@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+</head>
+<body style="padding:2rem;">
+    <%- include('./partials/nav') %>
+    <h1>Full Menu</h1>
+
+    <h2 style="text-align: center; padding: 1rem 0 0 0;">Mains</h2>
+    <section style="padding:1rem;">
+    <%  restaurant.menu.forEach((item) => {
+        if (item.category === "mains") { %>
+            <h6 style="color:green;font-size: 1.3rem; margin:1rem 0 0 0;">
+                <%= item.name %>
+            </h6>
+            <ul style="margin: 0;">
+                <li>
+                    Price: <%= item.price %>
+                </li>
+                <li>
+                    Rating: <%= item.rating %>
+                </li>
+                <li>
+                    Description: <%= item.details %>
+                </li>
+            </ul>
+    <% }
+    }); %>
+    </section>
+
+    <h2 style="text-align: center; padding: 1rem 0 0 0;">Sides</h2>
+    <section style="padding:1rem;">
+        <%  restaurant.menu.forEach((item) => {
+            if (item.category === "sides") { %>
+                <h6 style="color:green;font-size: 1.3rem; margin:1rem 0 0 0;">
+                    <%= item.name %>
+                </h6>
+                <ul style="margin: 0;">
+                    <li>
+                        Price: <%= item.price %>
+                    </li>
+                    <li>
+                        Rating: <%= item.rating %>
+                    </li>
+                    <li>
+                        Description: <%= item.details %>
+                    </li>
+                </ul>
+        <% }
+        }); %>
+    </section>
+
+    <h2 style="text-align: center; padding: 1rem 0 0 0;">Desserts</h2>
+    <section style="padding:1rem;">
+        <%  restaurant.menu.forEach((item) => {
+            if (item.category === "desserts") { %>
+                <h6 style="color:green;font-size: 1.3rem; margin:1rem 0 0 0;">
+                    <%= item.name %>
+                </h6>
+                <ul style="margin: 0;">
+                    <li>
+                        Price: <%= item.price %>
+                    </li>
+                    <li>
+                        Rating: <%= item.rating %>
+                    </li>
+                    <li>
+                        Description: <%= item.details %>
+                    </li>
+                </ul>
+        <% }
+        }); %>
+    </section>
+
+</body>
+</html>
