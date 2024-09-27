@@ -49,8 +49,11 @@ app.get("/patients/new", (req, res) => {
 })
 
 // POST: new patient
-app.post("/patients", (req, res) => {
-    req.body.patient = true;
+app.post("/patients", async (req, res) => {
+    // req.body.patient = true;
+    console.log(req.body)
+
+    await Patient.create(req.body)
 
     res.render("index");
 })
