@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 export default mongoose.model('Patient', new mongoose.Schema({
+    patient: Boolean,
     physician: String,
     name: String,
     age: Number,
@@ -8,6 +9,5 @@ export default mongoose.model('Patient', new mongoose.Schema({
     weight: Number,
     condition: String,
     symptoms: String,
-    inpatient: Boolean,
-    readyForRelease: Boolean
+    inpatient: Boolean
 }))

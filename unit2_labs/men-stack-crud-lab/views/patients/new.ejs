@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>New Patient</title>
+</head>
+<body>
+    New patient page
+    <form action="/patients" method="POST">
+        
+        <input class="patient" type="text" name="patient" value="Patient" readonly/>
+
+        <div>
+            <label for="physician">Attending physician:</label>
+            <input type="text" name="physician" id="physician" />
+        </div>
+
+        <div>
+            <label for="name">Patient's full name:</label>
+            <input type="text" name="name" id="name" />
+        </div>
+
+        <div>
+            <label for="age">Age:</label>
+            <input type="text" name="age" id="age" />
+        </div>
+
+        <div>
+            <label for="height">Height (in inches):</label>
+            <input type="text" name="height" id="height" />
+        </div>
+
+        <div>
+            <label for="weight">Weight (in lbs):</label>
+            <input type="text" name="weight" id="weight" />
+        </div>
+
+        <div>
+            <label for="condition">Condition:</label>
+            <select id="condition" name="condition" required>
+                <option value="Depression">Depression</option>
+                <option value="Anxiety">Anxiety</option>
+                <option value="ADHD">ADHD</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="symptoms">Symptoms:</label>
+            <textarea type="text" name="symptoms" id="symptoms" placeholder="Describe symptoms" ></textarea>
+        </div>
+
+        <div>
+            <label for="inpatient">Inpatient treatment?</label>
+            <select id="inpatient" name="inpatient" required>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+        </div>
+
+        <div><button type="submit">Add Patient</button></div>
+    </form>  
+</body>
+</html>

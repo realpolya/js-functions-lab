@@ -1,0 +1,19 @@
+body {
+    background-color: thistle;
+    margin: 2rem;
+    color: purple;
+}
+
+p {
+    width: 50%;
+    font-size: 1.5rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+div {
+    margin: 1rem;
+}
