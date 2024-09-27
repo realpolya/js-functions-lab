@@ -1,6 +1,6 @@
 body {
     background-color: thistle;
-    margin: 2rem;
+    margin: auto 2rem;
     color: purple;
 }
 
@@ -16,4 +16,25 @@ form {
 
 div {
     margin: 1rem;
+}
+
+button {
+    height: 5rem;
+    width: 100%;
+    background-color: pink;
+    border-radius: 1rem;
+    margin: 1rem 0;
+}
+
+button:hover {
+    background-color: hotpink;
+    color: white;
+}
+
+#buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 80%;
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>New Physician</title>
+</head>
+<body>
+    <h1>New Physician page</h1>
+    <form action="/physicians" method="POST">
+
+        <div>
+            <label for="name">Physicians's full name:</label>
+            <input type="text" name="name" id="name" />
+        </div>
+
+        <div>
+            <label for="specialty">Specialty:</label>
+            <select id="specialty" name="specialty" required>
+                <option value="Psychiatry">Psychiatry</option>
+                <option value="Clinical psychology">Clinical psychology</option>
+                <option value="Developmental psychology">Developmental psychology</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="available">Available to take on new patients?</label>
+            <select id="available" name="available" required>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+        </div>
+
+        <div><button type="submit">Add Physician</button></div>
+    </form>  
+</body>
+</html>

@@ -59,5 +59,16 @@ app.post("/patients", async (req, res) => {
 })
 
 // GET: new physician
+app.get("/physicians/new", (req, res) => {
+    res.render("physicians/new");
+})
 
 // POST: new physician
+app.post("/physicians", async (req, res) => {
+    // req.body.patient = true;
+    console.log(req.body)
+
+    await Physician.create(req.body)
+
+    res.render("index");
+})
