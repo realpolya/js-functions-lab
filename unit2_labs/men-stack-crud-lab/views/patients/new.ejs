@@ -11,8 +11,15 @@
     <form action="/patients" method="POST">
 
         <div>
+        <!--<label for="physician">Attending physician:</label>
+            <input type="text" name="physician" id="physician" /> -->
             <label for="physician">Attending physician:</label>
-            <input type="text" name="physician" id="physician" />
+            <select id="physician" name="physician">
+                <% allPhysicians.forEach((physician) => { %>
+                    <option value="<%= physician.name %>"><%= physician.name %></option>
+                <% }) %>
+                <option value="Other">Other</option>
+            </select>
         </div>
 
         <div>
@@ -65,5 +72,15 @@
 
         <div><button type="submit">Add Patient</button></div>
     </form>  
+
+    <div id="buttons">
+        <form action="/patients" method="GET">
+            <button type="submit">See all patients</button>
+        </form>
+    
+        <form action="/" method="GET">
+            <button type="submit">Go home</button>
+        </form>
+    </div>
 </body>
 </html>

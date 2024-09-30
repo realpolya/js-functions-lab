@@ -54,8 +54,9 @@ app.get("/physicians", async (req, res) => {
 })
 
 // GET: new patient
-app.get("/patients/new", (req, res) => {
-    res.render("patients/new");
+app.get("/patients/new", async (req, res) => {
+    const allPhysicians = await Physician.find();
+    res.render("patients/new", { allPhysicians });
 })
 
 // POST: new patient
