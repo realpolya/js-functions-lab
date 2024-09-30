@@ -9,5 +9,9 @@ export default model('User', Schema({
       type: String,
       required: true,
     },
+    pantry: {
+      type: [Schema.Types.ObjectId],
+      required: false
+    }
   })
 );

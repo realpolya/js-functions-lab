@@ -5,4 +5,4 @@ export default model('Ingredient', Schema({
         type: String,
         required: true
     }
-}))
+}));

@@ -1,0 +1,43 @@
+body {
+    background-color: lightyellow;
+    margin: 5rem;
+    color: limegreen;
+    font-size: 1.1rem;
+}
+
+div {
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    color: green;
+}
+
+input {
+    background-color: honeydew;
+    height: 1.5rem;
+    border-radius: 1rem;
+    padding: 0 .6rem;
+}
+
+button {
+    height: 4rem;
+    border-radius: 1rem;
+    font-size: 1.1rem;
+    background-color: green;
+    color: white;
+}
+
+#buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 80%;
+}
+
+a {
+    color: darkgreen;
+}

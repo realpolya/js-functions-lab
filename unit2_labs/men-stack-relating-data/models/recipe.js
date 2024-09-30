@@ -14,7 +14,7 @@ export default model("Recipe", Schema({
         required: true
     },
     ingredients: {
-        type: [mongoose.Schema.Types.ObjectId],
+        type: [Schema.Types.ObjectId],
         required: false
     }
 }))
