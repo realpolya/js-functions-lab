@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <!--inserting icon-->
+    <title><%= person.name %></title>
+</head>
+<body>
+    <h1>
+        Edit <%= person.name %>
+    </h1>
+
+    <form action="/profile/<%=person._id%>?_method=PUT" method="POST">
+    <% if (person.physician) { %>
+
+            <div>
+                <label for="physician">Attending physician:</label>
+                <select id="physician" name="physician">
+                    <% allPhysicians.forEach((physician) => { %>
+                        <option 
+                        value="<%= physician.name %>"
+                        <% if (person.physician === other.name) {%> selected="selected" <%}%>>
+                            <%= physician.name %>
+                        </option>
+                    <% }) %>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+    
+            <div>
+                <label for="name">Patient's full name:</label>
+                <input type="text" name="name" id="name" />
+            </div>
+    
+            <div>
+                <label for="age">Age:</label>
+                <input type="text" name="age" id="age" />
+            </div>
+    
+            <div>
+                <label for="sex">Sex:</label>
+                <input type="text" name="sex" id="sex" />
+            </div>
+    
+            <div>
+                <label for="height">Height (in inches):</label>
+                <input type="text" name="height" id="height" />
+            </div>
+    
+            <div>
+                <label for="weight">Weight (in lbs):</label>
+                <input type="text" name="weight" id="weight" />
+            </div>
+    
+            <div>
+                <label for="condition">Condition:</label>
+                <select id="condition" name="condition" required>
+                    <option value="Depression">Depression</option>
+                    <option value="Anxiety">Anxiety</option>
+                    <option value="ADHD">ADHD</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+    
+            <div>
+                <label for="symptoms">Symptoms:</label>
+                <textarea type="text" name="symptoms" id="symptoms" placeholder="Describe symptoms" ></textarea>
+            </div>
+    
+            <div>
+                <label for="inpatient">Inpatient treatment?</label>
+                <select id="inpatient" name="inpatient" required>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+    
+            <div><button type="submit">Add Patient</button></div>
+        <li>Attending physician: <%= person.physician %> </li>
+        <li>Age: <%= person.age %> </li>
+        <li>Sex: <%= person.sex %> </li>
+        <li>Height (in inches): <%= person.height %> </li>
+        <li>Weight (in lbs): <%= person.weight %> </li>
+        <li>Condition: <%= person.condition %> </li>
+        <li>Symptoms: <%= person.symptoms %> </li>
+        <li>Inpatient: 
+            <% if (person.inpatient) { %>
+                Yes
+            <% } else { %>
+                No
+            <% } %>
+        </li>
+    <% } else { %>
+        <li>Specialty: <%= person.specialty %> </li>
+        <li>Bio: <%= person.bio %> </li>
+        <li>Available to take on new patients: 
+            <% if (person.available) { %>
+                Yes
+            <% } else { %>
+                No
+            <% } %>
+        </li>
+        <li>
+            Current patients:
+            <% if (patientList) { %>
+                <ul>
+                    <% patientList.forEach((patient) => { %>
+                        <li><a href="../profile/<%= patient._id %>"><%= patient.name %></a></li>
+                    <% }) %>
+                </ul>
+            <% } %>
+        </li>
+    <% } %>
+    </form>  
+
+
+    <div id="buttons">
+        <form action="/patients" method="GET">
+            <button type="submit">View patients list</button>
+        </form>
+
+        <form action="/physicians" method="GET">
+            <button type="submit">View physicians list</button>
+        </form>
+    
+        <form action="/" method="GET">
+            <button type="submit">Go home</button>
+        </form>
+
+        <form action="/profile/<%= person._id %>?_method=DELETE" 
+            method="POST">
+            <button id="delete-button" type="submit">Delete <%= person.name %></button>
+        </form>
+    </div>
+</body>
+</html>
+
+<form action="/fruits/<%=fruitItem._id%>?_method=PUT" method="POST">
+    <label for="name">New name:</label>
+    <input type="text" name="name" id="name" value="<%= fruitItem.name %>"/>
+
+    <label for="isReadyToEat">Has it ripened?</label>
+    <input type="checkbox" name="ripe" id="ripe" 
+    <% if (fruitItem.ripe) { %> 
+        checked
+    <% } %>
+    />
+
+    <button type="submit">Update <%= fruitItem.name %></button>
+</form>

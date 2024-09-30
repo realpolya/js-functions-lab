@@ -133,3 +133,41 @@ app.delete("/profile/:item", async (req, res) => {
 
     res.render("index", { person });
 });
+
+// GET: profile edit page
+app.get("/profile/:item/edit", async (req, res) => {
+    
+    // find the necessary fruit
+    const id = req.params.item; 
+    try {
+        person = await Patient.findById(id);
+
+        if (!person) {
+            person = await Physician.findById(id);
+        }
+    } catch (err) {
+        console.log(err);
+    }
+
+    res.render("edit", { person });
+
+})
+
+
+// PUT: profile edit page
+
+// app.put("/fruits/:item", async (req, res) => {
+    
+//     // find the necessary fruit
+//     const id = req.params.item; 
+
+//     if(req.body.ripe === "on") {
+//         req.body.ripe = true;
+//     } else {
+//         req.body.ripe = false;
+//     }
+
+//     const fruitItem = await Fruit.findByIdAndUpdate(id, req.body);
+//     res.redirect(`/fruits/${id}`)
+
+// })
