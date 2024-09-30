@@ -18,10 +18,12 @@
         <div>
             <label for="specialty">Specialty:</label>
             <select id="specialty" name="specialty" required>
-                <option value="Psychiatry">Psychiatry</option>
-                <option value="Clinical psychology">Clinical psychology</option>
-                <option value="Clinical psychology">Abnormal psychology</option>
+                <option value="Psychiatry MD PsyD">Psychiatry MD PsyD</option>
+                <option value="General clinical psychology">General clinical psychology</option>
+                <option value="Abnormal psychology">Abnormal psychology</option>
                 <option value="Developmental psychology">Developmental psychology</option>
+                <option value="Eating disorders">Eating disorders</option>
+                <option value="Mood disorders">Mood disorders</option>
                 <option value="Other">Other</option>
             </select>
         </div>
@@ -34,7 +36,27 @@
             </select>
         </div>
 
+        <div>
+            <label for="bio">Biography:</label>
+            <textarea type="text" name="bio" id="bio" placeholder="Physician's biography" ></textarea>
+        </div>
+
         <div><button type="submit">Add Physician</button></div>
-    </form>  
+    </form> 
+
+    <div id="buttons">
+        <form action="/patients" method="GET">
+            <button type="submit">View list of patients</button>
+        </form>
+
+        <form action="/physicians" method="GET">
+            <button type="submit">View list of physicians</button>
+        </form>
+
+        <form action="/" method="GET">
+            <button type="submit">Go home</button>
+        </form>
+    </div>
+
 </body>
 </html>

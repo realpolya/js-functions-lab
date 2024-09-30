@@ -16,6 +16,11 @@ form {
 
 div {
     margin: 1rem;
+    width: 70%;
+}
+
+input {
+    width: 60%;
 }
 
 button {
@@ -37,6 +42,7 @@ button:hover {
     align-items: center;
     justify-content: space-evenly;
     width: 80%;
+    flex-wrap: wrap;
 }
 
 table, td, tr {
@@ -58,4 +64,17 @@ a {
 
 li {
     padding: .2rem;
+}
+
+#delete-button {
+    background-color: purple;
+    color: white;
+}
+
+@media (max-width: 500px) {
+    
+    #buttons {
+        flex-direction: column;
+    }
+
 }

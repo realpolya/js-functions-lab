@@ -30,7 +30,11 @@
             </li>
         <% } else { %>
             <li>Specialty: <%= person.specialty %> </li>
-            <li>Bio: <%= person.bio %> </li>
+            <li>Bio: 
+                <ul>
+                    <li><%= person.bio %></li>
+                </ul>
+            </li>
             <li>Available to take on new patients: 
                 <% if (person.available) { %>
                     Yes
@@ -62,6 +66,11 @@
     
         <form action="/" method="GET">
             <button type="submit">Go home</button>
+        </form>
+
+        <form action="/profile/<%= person._id %>/edit" 
+            method="GET">
+            <button type="submit">Edit <%= person.name %></button>
         </form>
 
         <form action="/profile/<%= person._id %>?_method=DELETE" 

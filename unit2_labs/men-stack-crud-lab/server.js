@@ -61,7 +61,8 @@ app.get("/patients/new", async (req, res) => {
 // POST: new patient
 app.post("/patients", async (req, res) => {
     await Patient.create(req.body)
-    res.render("index");
+    let person;
+    res.render("index", { person });
 })
 
 // GET: new physician
@@ -72,7 +73,8 @@ app.get("/physicians/new", (req, res) => {
 // POST: new physician
 app.post("/physicians", async (req, res) => {
     await Physician.create(req.body)
-    res.render("index");
+    let person;
+    res.render("index", { person });
 })
 
 // GET: profile page for a person
@@ -112,8 +114,6 @@ app.get("/profile/:item", async (req, res) => {
     res.render("profile", { person, patientList });
 });
 
-// PUT: profile page update
-
 
 // DELETE: profile delete
 app.delete("/profile/:item", async (req, res) => {
@@ -138,7 +138,8 @@ app.delete("/profile/:item", async (req, res) => {
 app.get("/profile/:item/edit", async (req, res) => {
     
     // find the necessary fruit
-    const id = req.params.item; 
+    const id = req.params.item;
+    let person;
     try {
         person = await Patient.findById(id);
 
@@ -150,7 +151,7 @@ app.get("/profile/:item/edit", async (req, res) => {
     }
 
     let other;
-    if (person.inpatient) {
+    if (person.condition) {
         
         console.log("this is a patient")
         other = await Physician.find();
@@ -163,19 +164,22 @@ app.get("/profile/:item/edit", async (req, res) => {
 
 
 // PUT: profile edit page
+app.put("/profile/:item", async (req, res) => {
 
-// app.put("/fruits/:item", async (req, res) => {
-    
-//     // find the necessary fruit
-//     const id = req.params.item; 
+    // find the necessary person
+    const id = req.params.item;
+    let person;
 
-//     if(req.body.ripe === "on") {
-//         req.body.ripe = true;
-//     } else {
-//         req.body.ripe = false;
-//     }
+    try {
+        person = await Patient.findByIdAndUpdate(id, req.body);
 
-//     const fruitItem = await Fruit.findByIdAndUpdate(id, req.body);
-//     res.redirect(`/fruits/${id}`)
+        if (!person) {
+            person = await Physician.findByIdAndUpdate(id, req.body);
+        }
+    } catch (err) {
+        console.log(err);
+    }
 
-// })
+    res.redirect(`/`)
+
+})

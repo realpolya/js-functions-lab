@@ -51,8 +51,12 @@
             <label for="condition">Condition:</label>
             <select id="condition" name="condition" required>
                 <option value="Depression">Depression</option>
+                <option value="Eating disorder">Eating disorder</option>
                 <option value="Anxiety">Anxiety</option>
+                <option value="Bipolar Mood Disorder">Bipolar Mood Disorder</option>
                 <option value="ADHD">ADHD</option>
+                <option value="Developmental Disorder">Developmental Disorder</option>
+                <option value="Personality Disorder">Personality Disorder</option>
                 <option value="Other">Other</option>
             </select>
         </div>
@@ -75,9 +79,13 @@
 
     <div id="buttons">
         <form action="/patients" method="GET">
-            <button type="submit">See all patients</button>
+            <button type="submit">View list of patients</button>
         </form>
-    
+
+        <form action="/physicians" method="GET">
+            <button type="submit">View list of physicians</button>
+        </form>
+
         <form action="/" method="GET">
             <button type="submit">Go home</button>
         </form>
