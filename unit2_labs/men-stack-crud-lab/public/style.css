@@ -38,3 +38,20 @@ button:hover {
     justify-content: space-evenly;
     width: 80%;
 }
+
+table, td, tr {
+    border: 1px black solid;
+}
+
+td {
+    padding: 1rem;
+}
+
+.td-header {
+    background-color: aquamarine;
+}
+
+a {
+    color: blue;
+    text-decoration: underline;
+}

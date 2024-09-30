@@ -6,30 +6,32 @@
     <link rel="stylesheet" href="/style.css">
     <!--inserting icon-->
     <link href="favicon.ico" rel="icon" type="image/png">
-    <title>List of patients</title>
+    <title>List of physicians</title>
 </head>
 <body>
     <h1>
-        List of patients
+        List of physicians
     </h1>
     <p>
-        List of active Psych ward patients.
+        List of Psych ward physicians.
     </p>
     <table>
         <tr>
-            <td class="td-header">Name of Patient</td>
-            <td class="td-header">Attending Physician</td>
-            <td class="td-header">Age</td>
-            <td class="td-header">Diagnosis</td>
-            <td class="td-header">Inpatient?</td>
+            <td class="td-header">Name of Physician</td>
+            <td class="td-header">Specialty</td>
+            <td class="td-header">Availability to take new patients</td>
         </tr>
-        <% allPatients.forEach((patient) => { %>
+        <% allPhysicians.forEach((physician) => { %>
             <tr>
-                <td><a><%= patient.name %></a></td>
-                <td><%= patient.physician %></td>
-                <td><%= patient.age %></td>
-                <td><%= patient.condition %></td>
-                <td><%= patient.inpatient %></td>
+                <td><a><%= physician.name %></a></td>
+                <td><%= physician.specialty %></td>
+                <td>
+                    <% if (physician.available) { %>
+                        Available
+                    <% } else { %>
+                        Not Available
+                    <% } %>
+                </td>
             </tr>
         <% }) %>
     </table>
