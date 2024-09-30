@@ -149,7 +149,15 @@ app.get("/profile/:item/edit", async (req, res) => {
         console.log(err);
     }
 
-    res.render("edit", { person });
+    let other;
+    if (person.inpatient) {
+        
+        console.log("this is a patient")
+        other = await Physician.find();
+
+    }
+
+    res.render("edit", { person, other });
 
 })
 

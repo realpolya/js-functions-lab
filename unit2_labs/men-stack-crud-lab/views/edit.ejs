@@ -18,10 +18,13 @@
             <div>
                 <label for="physician">Attending physician:</label>
                 <select id="physician" name="physician">
-                    <% allPhysicians.forEach((physician) => { %>
+                    <% other.forEach((physician) => { %>
                         <option 
-                        value="<%= physician.name %>"
-                        <% if (person.physician === other.name) {%> selected="selected" <%}%>>
+                            value="<%= physician.name %>",
+                            <% if (person.physician === physician.name) {%>
+                                selected="selected" 
+                            <% } %>
+                        >
                             <%= physician.name %>
                         </option>
                     <% }) %>
@@ -31,7 +34,7 @@
     
             <div>
                 <label for="name">Patient's full name:</label>
-                <input type="text" name="name" id="name" />
+                <input type="text" name="name" id="name" value="<%= person.name %>" />
             </div>
     
             <div>
@@ -134,6 +137,7 @@
             <button id="delete-button" type="submit">Delete <%= person.name %></button>
         </form>
     </div>
+    
 </body>
 </html>
 
