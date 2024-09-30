@@ -83,3 +83,18 @@ app.post("/physicians", async (req, res) => {
 
     res.render("index");
 })
+
+// GET: profile page for a person
+app.get("/profile/:item", async (req, res) => {
+    
+    // find the necessary person
+    const id = req.params.item; 
+    let person;
+    try {
+        person = await Patient.findById(id);
+    } catch {
+        person = await Physician.findById(id);
+    }
+
+    res.render("profile", { person });
+})

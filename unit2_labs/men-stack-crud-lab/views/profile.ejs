@@ -6,12 +6,13 @@
     <link rel="stylesheet" href="/style.css">
     <!--inserting icon-->
     <link href="favicon.ico" rel="icon" type="image/png">
-    <title>List of patients</title>
+    <title><%= person.name %></title>
 </head>
 <body>
     <h1>
-        List of patients
+        <%= person.name %>
     </h1>
+    <!--
     <p>
         List of active Psych ward patients.
     </p>
@@ -23,15 +24,7 @@
             <td class="td-header">Diagnosis</td>
             <td class="td-header">Inpatient?</td>
         </tr>
-        <% allPatients.forEach((patient) => { %>
-            <tr>
-                <td><a href="../profile/<%= patient._id %>"><%= patient.name %></a></td>
-                <td><%= patient.physician %></td>
-                <td><%= patient.age %></td>
-                <td><%= patient.condition %></td>
-                <td><%= patient.inpatient %></td>
-            </tr>
-        <% }) %>
+        
     </table>
 
     <div id="buttons">
@@ -42,6 +35,6 @@
         <form action="/" method="GET">
             <button type="submit">Go home</button>
         </form>
-    </div>
+    </div> --->
 </body>
 </html>
