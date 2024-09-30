@@ -63,31 +63,11 @@
         <form action="/" method="GET">
             <button type="submit">Go home</button>
         </form>
+
+        <form action="/profile/<%= person._id %>?_method=DELETE" 
+            method="POST">
+            <button id="delete-button" type="submit">Delete <%= person.name %></button>
+        </form>
     </div>
-
-    <!--
-    <p>
-        List of active Psych ward patients.
-    </p>
-    <table>
-        <tr>
-            <td class="td-header">Name of Patient</td>
-            <td class="td-header">Attending Physician</td>
-            <td class="td-header">Age</td>
-            <td class="td-header">Diagnosis</td>
-            <td class="td-header">Inpatient?</td>
-        </tr>
-        
-    </table>
-
-    <div id="buttons">
-        <form action="/patients/new" method="GET">
-            <button type="submit">Add a patient</button>
-        </form>
-    
-        <form action="/" method="GET">
-            <button type="submit">Go home</button>
-        </form>
-    </div> --->
 </body>
 </html>

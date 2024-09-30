@@ -36,7 +36,8 @@ app.listen(3000, () => {
 
 // GET: render home
 app.get("/", (req, res) => {
-    res.render("index");
+    let person;
+    res.render("index", { person });
 })
 
 // GET: list of patients
@@ -113,4 +114,22 @@ app.get("/profile/:item", async (req, res) => {
 
 // PUT: profile page update
 
+
 // DELETE: profile delete
+app.delete("/profile/:item", async (req, res) => {
+    
+    // find the necessary person
+    const id = req.params.item;
+    let person;
+    try {
+        person = await Patient.findByIdAndDelete(id);
+
+        if (!person) {
+            person = await Physician.findByIdAndDelete(id);
+        }
+    } catch (err) {
+        console.log(err);
+    }
+
+    res.render("index", { person });
+});
