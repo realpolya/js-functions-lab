@@ -5,13 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
     <!--inserting icon-->
-    <link href="favicon.ico" rel="icon" type="image/png">
     <title><%= person.name %></title>
 </head>
 <body>
     <h1>
         <%= person.name %>
     </h1>
+
+    <ul class="profile-info">
+        <% if (person.physician) { %>
+            <li>Attending physician: <%= person.physician %> </li>
+        <% } else { %>
+            <li>Specialty: <%= person.specialty %> </li>
+        <% } %>
+
+    </ul>
     <!--
     <p>
         List of active Psych ward patients.

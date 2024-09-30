@@ -42,14 +42,12 @@ app.get("/", (req, res) => {
 // GET: list of patients
 app.get("/patients", async (req, res) => {
     const allPatients = await Patient.find();
-    console.log(allPatients);
     res.render("patients/list", { allPatients })    
 })
 
 // GET: list of physicians
 app.get("/physicians", async (req, res) => {
     const allPhysicians = await Physician.find();
-    console.log(allPhysicians);
     res.render("physicians/list", { allPhysicians })    
 })
 
@@ -61,11 +59,7 @@ app.get("/patients/new", async (req, res) => {
 
 // POST: new patient
 app.post("/patients", async (req, res) => {
-    // req.body.patient = true;
-    console.log(req.body)
-
     await Patient.create(req.body)
-
     res.render("index");
 })
 
@@ -76,11 +70,7 @@ app.get("/physicians/new", (req, res) => {
 
 // POST: new physician
 app.post("/physicians", async (req, res) => {
-    // req.body.patient = true;
-    console.log(req.body)
-
     await Physician.create(req.body)
-
     res.render("index");
 })
 
@@ -92,9 +82,28 @@ app.get("/profile/:item", async (req, res) => {
     let person;
     try {
         person = await Patient.findById(id);
-    } catch {
-        person = await Physician.findById(id);
+        
+        if (!person) {
+            person = await Physician.findById(id);
+        }
+    } catch (err) {
+        console.log(err);
     }
 
+    // console.log(person.physician)
+    // console.log(typeof(person))
+
+    // console.log(Object.keys(person))
+    // console.log(person.hasOwnProperty('inpatient'))
+
+    // let type = "physician";
+    // if (Object.keys(person).includes("inpatient")) {
+    //     type = "patient";
+    // }
+
     res.render("profile", { person });
-})
+});
+
+// PUT: profile page update
+
+// DELETE: profile delete

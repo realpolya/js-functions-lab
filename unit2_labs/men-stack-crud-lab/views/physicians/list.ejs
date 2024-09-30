@@ -23,7 +23,7 @@
         </tr>
         <% allPhysicians.forEach((physician) => { %>
             <tr>
-                <td><a><%= physician.name %></a></td>
+                <td><a href="../profile/<%= physician._id %>"><%= physician.name %></a></td> 
                 <td><%= physician.specialty %></td>
                 <td>
                     <% if (physician.available) { %>
