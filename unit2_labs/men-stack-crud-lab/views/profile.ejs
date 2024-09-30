@@ -43,7 +43,7 @@
                 <% if (patientList) { %>
                     <ul>
                         <% patientList.forEach((patient) => { %>
-                            <li><%= patient.name %></li>
+                            <li><a href="../profile/<%= patient._id %>"><%= patient.name %></a></li>
                         <% }) %>
                     </ul>
                 <% } %>
