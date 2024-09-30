@@ -82,7 +82,7 @@ app.get("/profile/:item", async (req, res) => {
     let person;
     try {
         person = await Patient.findById(id);
-        
+
         if (!person) {
             person = await Physician.findById(id);
         }
@@ -90,18 +90,25 @@ app.get("/profile/:item", async (req, res) => {
         console.log(err);
     }
 
-    // console.log(person.physician)
-    // console.log(typeof(person))
+    let patientList;
+    if (person.specialty) {
+        
+        console.log("this is a physician")
+        patientList = await Patient.find();
 
-    // console.log(Object.keys(person))
-    // console.log(person.hasOwnProperty('inpatient'))
+        if (patientList) {
+            
+            patientList = patientList.filter((patient) => {
+                return patient.physician === person.name;
+            })
 
-    // let type = "physician";
-    // if (Object.keys(person).includes("inpatient")) {
-    //     type = "patient";
-    // }
+        }
 
-    res.render("profile", { person });
+        console.log(patientList);
+
+    }
+
+    res.render("profile", { person, patientList });
 });
 
 // PUT: profile page update

@@ -15,11 +15,56 @@
     <ul class="profile-info">
         <% if (person.physician) { %>
             <li>Attending physician: <%= person.physician %> </li>
+            <li>Age: <%= person.age %> </li>
+            <li>Sex: <%= person.sex %> </li>
+            <li>Height (in inches): <%= person.height %> </li>
+            <li>Weight (in lbs): <%= person.weight %> </li>
+            <li>Condition: <%= person.condition %> </li>
+            <li>Symptoms: <%= person.symptoms %> </li>
+            <li>Inpatient: 
+                <% if (person.inpatient) { %>
+                    Yes
+                <% } else { %>
+                    No
+                <% } %>
+            </li>
         <% } else { %>
             <li>Specialty: <%= person.specialty %> </li>
+            <li>Bio: <%= person.bio %> </li>
+            <li>Available to take on new patients: 
+                <% if (person.available) { %>
+                    Yes
+                <% } else { %>
+                    No
+                <% } %>
+            </li>
+            <li>
+                Current patients:
+                <% if (patientList) { %>
+                    <ul>
+                        <% patientList.forEach((patient) => { %>
+                            <li><%= patient.name %></li>
+                        <% }) %>
+                    </ul>
+                <% } %>
+            </li>
         <% } %>
-
     </ul>
+
+    <div id="buttons">
+        <form action="/patients" method="GET">
+            <button type="submit">View patients list</button>
+        </form>
+
+        <form action="/physicians" method="GET">
+            <button type="submit">View physicians list</button>
+        </form>
+    
+        <form action="/" method="GET">
+            <button type="submit">Go home</button>
+        </form>
+    </div>
+
     <!--
     <p>
         List of active Psych ward patients.

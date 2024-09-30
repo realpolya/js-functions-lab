@@ -48,10 +48,14 @@ td {
 }
 
 .td-header {
-    background-color: aquamarine;
+    background-color: lemonchiffon;
 }
 
 a {
-    color: blue;
+    color: magenta;
     text-decoration: underline;
+}
+
+li {
+    padding: .2rem;
 }
