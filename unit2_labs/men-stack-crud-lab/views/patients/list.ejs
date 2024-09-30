@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <!--inserting icon-->
+    <link href="favicon.ico" rel="icon" type="image/png">
+    <title>List of patients</title>
+</head>
+<body>
+    <h1>
+        List of patients
+    </h1>
+    <p>
+        List of active Psych ward patients.
+    </p>
+    <table>
+        <tr>
+            <td>Name of Patient</td>
+            <td>Attending Physician</td>
+            <td>Age</td>
+            <td>Diagnosis</td>
+            <td>Inpatient</td>
+        </tr>
+        <% allPatients.forEach((patient) => { %>
+            <tr>
+
+            </tr>
+        <% }) %>
+    </table>
+
+    <div id="buttons">
+        <form action="/patients/new" method="GET">
+            <button type="submit">Add a patient</button>
+        </form>
+    
+        <form action="/" method="GET">
+            <button type="submit">Go home</button>
+        </form>
+    </div>
+</body>
+</html>
