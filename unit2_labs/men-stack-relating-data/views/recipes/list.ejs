@@ -9,6 +9,22 @@
 <body>
     <%- include('../partials/_navbar.ejs') %>
     <h1>The list of recipes</h1>
+    <div id="app-table">
+        <table>
+            <tr>
+                <td class="td-head">Name</td>
+                <td class="td-head">Instructions</td>
+                <td class="td-head">Ingredients</td>
+            </tr>
+            <% allRecipes.forEach((recipe) => { %>
+                <tr>
+                    <td><%= recipe.name %></td>
+                    <td><%= recipe.instructions %></td>
+                    <td><%= recipe.ingredients %></td>
+                </tr>
+            <% }) %>
+        </table>
+    </div>
 
     <div id="buttons">
         <form action="/recipes/new" method="GET">

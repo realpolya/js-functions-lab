@@ -52,10 +52,6 @@ const middleware = () => {
 
   // routes to authenticate
   app.use(userToView);
-  app.use("/auth", authController);
-  app.use(isSignedIn);
-  app.use("/recipes", recipesController);
-  app.use("/ingredients", ingredientsController);
 
   // use ejs
   app.set('view engine', 'ejs');
@@ -71,6 +67,14 @@ app.get("/", (req, res) => {
   res.render("index", { user: req.session.user });
 });
 
+
+app.use("/auth", authController);
+
+// need to be signed in
+app.use(isSignedIn);
+app.use("/recipes", recipesController);
+app.use("/ingredients", ingredientsController);
+
 // GET signed-in ?
 app.get("/vip-lounge", (req, res) => {
   if (req.session.user) {
@@ -79,9 +83,6 @@ app.get("/vip-lounge", (req, res) => {
     res.send("Sorry, no guests allowed")
   }
 })
-
-
-
 
 // LISTEN
 app.listen(PORT, () => {

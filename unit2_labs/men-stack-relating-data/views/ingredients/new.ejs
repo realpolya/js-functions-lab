@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>New ingredient</title>
+</head>
+<body>
+    <%- include('../partials/_navbar.ejs') %>
+    <h1>New ingredient</h1>
+    <form action="/ingredients" method="POST">
+
+        <div>
+            <label for="name">Ingredient:</label>
+            <input type="text" name="name" id="name" />
+        </div>
+
+        <div><button type="submit">Add ingredient</button></div>
+
+    </form> 
+
+
+    <div id="buttons">
+        <form action="/ingredients" method="GET">
+            <button type="submit">Back to list</button>
+        </form>
+    </div>
+    
+</body>
+</html>
