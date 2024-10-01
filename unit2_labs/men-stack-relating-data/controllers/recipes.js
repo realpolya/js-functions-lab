@@ -12,7 +12,7 @@ router.get('/', async (req, res) => {
 // GET new recipe page
 router.get('/new', async (req, res) => {
 
-    res.render('recipes/new.ejs')
+    res.render('recipes/new.ejs', { user: req.session.user })
 })
 
 // POST new recipe

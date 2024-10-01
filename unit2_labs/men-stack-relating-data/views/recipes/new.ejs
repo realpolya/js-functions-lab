@@ -9,6 +9,30 @@
 <body>
     <%- include('../partials/_navbar.ejs') %>
     <h1>New recipe</h1>
+    <form action="/recipes" method="POST">
+
+        <div>
+            <label for="name">Recipe title:</label>
+            <input type="text" name="name" id="name" />
+        </div>
+
+        <div>
+            <label for="instructions">Instructions:</label>
+            <input type="text" name="instructions" id="instructions" />
+        </div>
+
+        <div>
+            <label for="owner">Owner:</label>
+            <input type="text" name="owner" id="owner" value="<%= user._id %>" readonly/>
+        </div>
+
+        <div>
+            <label for="ingredients">Ingredients:</label>
+            <input type="text" name="ingredients" id="ingredients" />
+        </div>
+
+        <div><button type="submit">Add Recipe</button></div>
+    </form> 
 
 
     <div id="buttons">
