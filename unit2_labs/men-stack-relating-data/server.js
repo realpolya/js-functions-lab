@@ -5,10 +5,17 @@ import mongoose from "mongoose";
 import methodOverride from "method-override";
 import morgan from "morgan";
 
+// models
 import User from "./models/user.js";
+
+// controllers
 import authController from "./controllers/auth.js";
 import recipesController from "./controllers/recipes.js";
 import ingredientsController from "./controllers/ingredients.js";
+
+// middleware functions
+import isSignedIn from "./middleware/is-signed-in.js";
+import userToView from "./middleware/user-view.js";
 
 import session from "express-session";
 // import MongoStore from "mongo-connect"; creates an issue
@@ -44,7 +51,9 @@ const middleware = () => {
   }))
 
   // routes to authenticate
+  app.use(userToView);
   app.use("/auth", authController);
+  app.use(isSignedIn);
   app.use("/recipes", recipesController);
   app.use("/ingredients", ingredientsController);
 
