@@ -10,7 +10,7 @@ export default model("Recipe", Schema({
         required: false
     },
     owner: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         required: true
     },
     ingredients: {

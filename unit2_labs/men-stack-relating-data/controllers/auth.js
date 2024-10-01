@@ -66,6 +66,7 @@ router.post("/sign-in", async (req, res) => {
     // asynchronous callback
     req.session.save(() => {
         res.redirect("/");
+        // res.render("/", { req });
     });
 
 })

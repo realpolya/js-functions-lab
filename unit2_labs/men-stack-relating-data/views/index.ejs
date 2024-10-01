@@ -7,8 +7,9 @@
     <title>Home page</title>
 </head>
 <body>
+    <%- include('./partials/_navbar.ejs') %>
     <% if (user) { %>
-        <h1>Welcome to the app, <%= user.username %>!</h1>
+        <h1>Welcome to the CookBook app, <%= user.username %>!</h1>
         <div id="buttons"></div>
             <form action="/auth/sign-out" method="GET">
                 <button type="submit">Sign out!</button>

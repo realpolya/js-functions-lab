@@ -14,8 +14,8 @@ import recipesController from "./controllers/recipes.js";
 import ingredientsController from "./controllers/ingredients.js";
 
 // middleware functions
-import isSignedIn from "./middleware/is-signed-in.js";
-import userToView from "./middleware/user-view.js";
+import { isSignedIn } from "./middleware/is-signed-in.js";
+import { userToView } from "./middleware/user-view.js";
 
 import session from "express-session";
 // import MongoStore from "mongo-connect"; creates an issue
