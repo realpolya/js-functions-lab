@@ -75,6 +75,9 @@ router.get("/sign-out", (req, res) => {
     req.session.destroy(() => {
         res.redirect("/");
     });
+
+    // req.session.destroy();
+    // res.redirect("/");
 })
 
 

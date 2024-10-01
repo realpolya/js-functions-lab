@@ -67,9 +67,8 @@ middleware();
 
 // GET home
 app.get("/", (req, res) => {
-  res.render("index", {
-    user: req.session.user,
-  });
+  console.log(req.session.user);
+  res.render("index", { user: req.session.user });
 });
 
 // GET signed-in ?
@@ -80,24 +79,6 @@ app.get("/vip-lounge", (req, res) => {
     res.send("Sorry, no guests allowed")
   }
 })
-
-// RECIPE ROUTES
-
-
-// GET all recipes
-
-// GET new recipe page
-
-// POST new recipe
-
-// GET individual recipe page
-
-// GET edit page for recipe
-
-// PUT page for recipe
-
-// DELETE page for recipe
-
 
 
 
