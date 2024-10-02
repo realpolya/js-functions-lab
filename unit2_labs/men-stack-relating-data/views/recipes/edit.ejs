@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title>Edit <%= recipe.name %></title>
+</head>
+<body>
+    <%- include('../partials/_navbar.ejs') %>
+    <h1>Edit <%= recipe.name %> recipe</h1>
+    <form id="new-recipe" action="/recipes/<%= recipe._id %>?_method=PUT" method="POST">
+
+        <div>
+            <label for="name">Recipe title:</label>
+            <input type="text" name="name" id="name" value="<%= recipe.name %>"/>
+        </div>
+
+        <div>
+            <label for="instructions">Instructions:</label>
+            <input type="text" name="instructions" id="instructions" value="<%= recipe.instructions %>"/>
+        </div>
+
+        <div id="ingr-list">
+            <label id="ingr-title">Ingredients</label><br>
+            <% allIngredients.forEach((ingredient) => { %>
+                <div id="ingredients">
+                    <input
+                        <% ingredients.forEach((item) => {
+                            if (JSON.stringify(item._id) === JSON.stringify(ingredient._id)) { %>
+                                checked
+                            <% }
+                        }) %>
+                        type="checkbox" 
+                        name="ingredients[]" 
+                        id="<%= ingredient._id %>" 
+                        value="<%= ingredient._id %>"/>
+                    <label for="ingredients[]"><%= ingredient.name %></label>                
+                </div>
+            <% }) %>
+        </div>
+
+        <div><button id="post-button" type="submit">Update <%= recipe.name %> recipe</button></div>
+    </form> 
+
+
+    <div id="buttons">
+        <form action="/recipes" method="GET">
+            <button type="submit">Back to list</button>
+        </form>
+    </div>
+    
+</body>
+</html>

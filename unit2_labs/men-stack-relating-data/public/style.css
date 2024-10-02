@@ -95,7 +95,9 @@ table {
 }
 
 #post-button {
-    width: 20%;
+    width: 30%;
+    min-height: 2rem;
+    max-height: 4rem;
     margin: 2rem auto;
 }
 

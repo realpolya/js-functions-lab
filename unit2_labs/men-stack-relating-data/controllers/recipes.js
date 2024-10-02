@@ -58,8 +58,6 @@ router.get("/:recipeId", async (req, res) => {
         const id = req.params.recipeId;
         const recipe = await Recipe.findById(id);
         const ingredients = await Ingredient.find({ _id: { $in: recipe.ingredients }});
-        console.log(ingredients);
-        // res.send('made it to recipeId')
         res.render('recipes/item.ejs', { recipe, ingredients })
     } catch(err) {
         console.log(err);
@@ -82,9 +80,40 @@ router.delete("/:recipeId", async (req, res) => {
 
 })
 
-// GET edit page for recipe
-
 // PUT page for recipe
+router.put("/:recipeId", async (req, res) => {
+    
+    try {
+        const user = await User.findById(req.session.user._id);
+        req.body.owner = user._id;
+        req.body.ingredients = req.body["ingredients[]"];
+
+        const id = req.params.recipeId;
+        let recipe = await Recipe.findByIdAndUpdate(id, req.body);
+        recipe = await Recipe.findById(id);
+        const ingredients = await Ingredient.find({ _id: { $in: recipe.ingredients }});
+        res.render('recipes/item.ejs', { recipe, ingredients });
+    } catch(err) {
+        console.log(err);
+        res.redirect('/');
+    }
+
+})
+
+// GET edit page for recipe
+router.get("/:recipeId/edit", async (req, res) => {
+
+    try {
+        const id = req.params.recipeId;
+        const recipe = await Recipe.findById(id);
+        const ingredients = await Ingredient.find({ _id: { $in: recipe.ingredients }});
+        const allIngredients = await Ingredient.find();
+        res.render('recipes/edit.ejs', { recipe, allIngredients, ingredients })
+    } catch(err) {
+        console.log(err);
+        res.redirect('/');
+    }
+})
 
 
 
