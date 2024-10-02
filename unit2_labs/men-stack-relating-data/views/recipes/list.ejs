@@ -20,7 +20,20 @@
                 <tr>
                     <td><%= recipe.name %></td>
                     <td><%= recipe.instructions %></td>
-                    <td><%= recipe.ingredients %></td>
+                    <td>
+                        <ul>
+                        <% recipe.ingredients.forEach((ingredient) => { 
+                            console.log(`Looping through ingredient ${ingredient}`)
+                            console.log(`The key is ${ingredient._id}`)
+                            allIngredients.forEach((item) => {
+                                if (JSON.stringify(item._id) === JSON.stringify(ingredient._id)) { 
+                                    console.log('match found'); %>
+                                    <li><%= item.name %></li>
+                                <% }; 
+                            });
+                        }); %>
+                        </ul>
+                    </td>
                 </tr>
             <% }) %>
         </table>

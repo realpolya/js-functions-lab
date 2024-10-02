@@ -8,7 +8,10 @@ import Ingredient from "../models/ingredient.js";
 // GET all recipes
 router.get('/', async (req, res) => {
     const allRecipes = await Recipe.find();
-    res.render('recipes/list.ejs', { allRecipes })
+    const allIngredients = await Ingredient.find();
+    console.log(allIngredients[0]._id);
+    console.log(allRecipes[3]);
+    res.render('recipes/list.ejs', { allRecipes, allIngredients })
 })
 
 // GET new recipe page
@@ -38,7 +41,11 @@ router.post('/', async (req, res) => {
     
     await Recipe.create(req.body);
     const allRecipes = await Recipe.find();
-    res.render('recipes/list.ejs', { allRecipes })
+
+    // ingredients are needed to be displayed in the recipe table
+    const allIngredients = await Ingredient.find()
+
+    res.render('recipes/list.ejs', { allRecipes, allIngredients })
 })
 
 // GET individual recipe page
