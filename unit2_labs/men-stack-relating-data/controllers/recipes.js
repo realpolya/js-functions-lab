@@ -3,14 +3,13 @@ const router = Router();
 import User from "../models/user.js";
 import Recipe from "../models/recipe.js";
 import Ingredient from "../models/ingredient.js";
+import ingredient from "../models/ingredient.js";
 
 // RECIPE ROUTES
 // GET all recipes
 router.get('/', async (req, res) => {
     const allRecipes = await Recipe.find();
     const allIngredients = await Ingredient.find();
-    console.log(allIngredients[0]._id);
-    console.log(allRecipes[3]);
     res.render('recipes/list.ejs', { allRecipes, allIngredients })
 })
 
@@ -49,6 +48,16 @@ router.post('/', async (req, res) => {
 })
 
 // GET individual recipe page
+router.get("/:recipeId", async (req, res) => {
+
+    const id = req.params.recipeId;
+    const recipe = await Recipe.findById(id);
+    const ingredients = await Ingredient.find({ _id: { $in: recipe.ingredients }});
+    console.log(ingredients);
+    res.send('made it to recipeId')
+    //res.render('recipes/item.ejs', { recipe })
+
+})
 
 // GET edit page for recipe
 

@@ -18,16 +18,13 @@
             </tr>
             <% allRecipes.forEach((recipe) => { %>
                 <tr>
-                    <td><%= recipe.name %></td>
+                    <td><a href="/recipes/<%= recipe._id %>"><%= recipe.name %></a></td>
                     <td><%= recipe.instructions %></td>
                     <td>
                         <ul>
                         <% recipe.ingredients.forEach((ingredient) => { 
-                            console.log(`Looping through ingredient ${ingredient}`)
-                            console.log(`The key is ${ingredient._id}`)
                             allIngredients.forEach((item) => {
-                                if (JSON.stringify(item._id) === JSON.stringify(ingredient._id)) { 
-                                    console.log('match found'); %>
+                                if (JSON.stringify(item._id) === JSON.stringify(ingredient._id)) { %>
                                     <li><%= item.name %></li>
                                 <% }; 
                             });
