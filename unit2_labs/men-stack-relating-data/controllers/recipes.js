@@ -8,9 +8,19 @@ import ingredient from "../models/ingredient.js";
 // RECIPE ROUTES
 // GET all recipes
 router.get('/', async (req, res) => {
-    const allRecipes = await Recipe.find();
-    const allIngredients = await Ingredient.find();
-    res.render('recipes/list.ejs', { allRecipes, allIngredients })
+    
+    try {
+        const user = await User.findById(req.session.user._id);
+        let allRecipes = await Recipe.find();
+        allRecipes = allRecipes.filter((recipe) => {
+            return (JSON.stringify(recipe.owner) === JSON.stringify(user._id));
+        })
+        const allIngredients = await Ingredient.find();
+        res.render('recipes/list.ejs', { allRecipes, allIngredients })
+    } catch (err) {
+        console.error(err);
+    }
+    
 })
 
 // GET new recipe page
@@ -25,45 +35,60 @@ router.get('/new', async (req, res) => {
 
 // POST new recipe
 router.post('/', async (req, res) => {
-    const user = req.session.user;
-    req.body.owner = user._id;
-    console.log(req.body);
-    req.body.ingredients = req.body["ingredients[]"];
-
-    // if a key has a value on, push it into ingredients array
-    // Object.keys(req.body).forEach((key) => {
-    //     // if not in recipe keys
-    //     if (key !== "name" && key !== "instructions" && key !== "owner") {
-    //         req.body.ingredients.push(key);
-    //     }
-    // })
     
-    await Recipe.create(req.body);
-    const allRecipes = await Recipe.find();
+    try {
+        const user = req.session.user;
+        req.body.owner = user._id;
+        req.body.ingredients = req.body["ingredients[]"];
+        
+        await Recipe.create(req.body);
+        const allRecipes = await Recipe.find();
 
-    // ingredients are needed to be displayed in the recipe table
-    const allIngredients = await Ingredient.find()
+        // ingredients are needed to be displayed in the recipe table
+        const allIngredients = await Ingredient.find()
 
-    res.render('recipes/list.ejs', { allRecipes, allIngredients })
+        res.render('recipes/list.ejs', { allRecipes, allIngredients })
+    } catch(err) {
+        console.log(err);
+        res.redirect('/');
+    }
+    
 })
 
 // GET individual recipe page
 router.get("/:recipeId", async (req, res) => {
 
-    const id = req.params.recipeId;
-    const recipe = await Recipe.findById(id);
-    const ingredients = await Ingredient.find({ _id: { $in: recipe.ingredients }});
-    console.log(ingredients);
-    res.send('made it to recipeId')
-    //res.render('recipes/item.ejs', { recipe })
+    try {
+        const id = req.params.recipeId;
+        const recipe = await Recipe.findById(id);
+        const ingredients = await Ingredient.find({ _id: { $in: recipe.ingredients }});
+        console.log(ingredients);
+        // res.send('made it to recipeId')
+        res.render('recipes/item.ejs', { recipe, ingredients })
+    } catch(err) {
+        console.log(err);
+        res.redirect('/');
+    }
+
+});
+
+// DELETE page for recipe
+router.delete("/:recipeId", async (req, res) => {
+    
+    try {
+        const id = req.params.recipeId;
+        const recipe = await Recipe.findByIdAndDelete(id);
+        res.render('recipes/deleted.ejs', { recipe });
+    } catch(err) {
+        console.log(err);
+        res.redirect('/');
+    }
 
 })
 
 // GET edit page for recipe
 
 // PUT page for recipe
-
-// DELETE page for recipe
 
 
 

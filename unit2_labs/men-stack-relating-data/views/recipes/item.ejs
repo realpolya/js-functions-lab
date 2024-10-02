@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <title><%= recipe.name %> Recipe</title>
+</head>
+<body>
+    <%- include('../partials/_navbar.ejs') %>
+    <h1><%= recipe.name %> Recipe</h1>
+    <div id="app-table">
+        <table>
+            <tr>
+                <td class="td-head">Name</td>
+                <td><%= recipe.name %></td>
+            </tr>
+            <tr>
+                <td class="td-head">Instructions</td>
+                <td><%= recipe.instructions %></td>
+            </tr>
+            <tr>
+                <td class="td-head">Ingredients</td>
+                <td>
+                    <ul>
+                        <% ingredients.forEach((ingredient) => { %>
+                            <li><%= ingredient.name %></li>
+                        <% }) %>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="buttons">
+        <form action="/recipes/<%=recipe._id%>/edit" method="GET">
+            <button type="submit">Edit <%= recipe.name %> recipe</button>
+        </form>
+        <form action="/recipes/<%=recipe._id%>?_method=DELETE" method="POST">
+            <button type="submit">Delete <%= recipe.name %> recipe</button>
+        </form>
+        <form action="/recipes" method="GET">
+            <button type="submit">List of recipes</button>
+        </form>
+        <form action="/recipes/new" method="GET">
+            <button type="submit">New recipe</button>
+        </form>
+    </div>
+    
+</body>
+</html>
