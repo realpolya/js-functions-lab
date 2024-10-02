@@ -13,12 +13,31 @@
         <table>
             <tr>
                 <td class="td-head">Ingredient</td>
+                <td class="td-head">Used in</td>
             </tr>
             <% allIngredients.forEach((ingredient) => { %>
                 <tr>
                     <td><%= ingredient.name %></td>
+                    <td>
+                        <ul>
+                            <% allRecipes.forEach((recipe) => { %>
+                                <% if (ingredient.recipes.includes(recipe._id)) { %>
+                                    
+                                    <% allUsers.forEach((user) => { %>
+                                        
+                                        <% if (JSON.stringify(recipe.owner) === JSON.stringify(user._id)) { %>
+                                            <li><span><%= recipe.name %></span> recipe by <span><%= user.username %></span></li>
+                                        <% } %>
+                                    <% }); %>
+                                    
+                                <% } %>
+
+                            <% }); %>
+
+                        </ul>
+                    </td>
                 </tr>
-            <% }) %>
+            <% }); %>
         </table>
     </div>
 

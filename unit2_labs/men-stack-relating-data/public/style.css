@@ -40,7 +40,7 @@ button {
 }
 
 a {
-    color: darkgreen;
+    color: darkmagenta;
 }
 
 nav {
@@ -104,4 +104,8 @@ table {
 ul {
     padding: .5rem;
     margin: .5rem;
+}
+
+span {
+    color: hotpink;
 }
