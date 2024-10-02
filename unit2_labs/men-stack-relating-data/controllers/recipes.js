@@ -3,7 +3,6 @@ const router = Router();
 import User from "../models/user.js";
 import Recipe from "../models/recipe.js";
 import Ingredient from "../models/ingredient.js";
-import ingredient from "../models/ingredient.js";
 
 // RECIPE ROUTES
 // GET all recipes
@@ -11,12 +10,9 @@ router.get('/', async (req, res) => {
     
     try {
         const user = await User.findById(req.session.user._id);
-        let allRecipes = await Recipe.find();
-        allRecipes = allRecipes.filter((recipe) => {
-            return (JSON.stringify(recipe.owner) === JSON.stringify(user._id));
-        })
+        const allRecipes = await Recipe.find({ owner: user._id });
         const allIngredients = await Ingredient.find();
-        res.render('recipes/list.ejs', { allRecipes, allIngredients })
+        res.render('recipes/list.ejs', { user, allRecipes, allIngredients })
     } catch (err) {
         console.error(err);
     }
@@ -37,12 +33,12 @@ router.get('/new', async (req, res) => {
 router.post('/', async (req, res) => {
     
     try {
-        const user = req.session.user;
+        const user = await User.findById(req.session.user._id);
         req.body.owner = user._id;
         req.body.ingredients = req.body["ingredients[]"];
         
         await Recipe.create(req.body);
-        const allRecipes = await Recipe.find();
+        const allRecipes = await Recipe.find({ owner: user._id });
 
         // ingredients are needed to be displayed in the recipe table
         const allIngredients = await Ingredient.find()
