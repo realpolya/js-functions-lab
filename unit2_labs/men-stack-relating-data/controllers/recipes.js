@@ -3,6 +3,7 @@ const router = Router();
 import User from "../models/user.js";
 import Recipe from "../models/recipe.js";
 import Ingredient from "../models/ingredient.js";
+import ingredient from "../models/ingredient.js";
 
 // RECIPE ROUTES
 // GET all recipes
@@ -37,7 +38,19 @@ router.post('/', async (req, res) => {
         req.body.owner = user._id;
         req.body.ingredients = req.body["ingredients[]"];
         
-        await Recipe.create(req.body);
+        const recipe = await Recipe.create(req.body);
+        console.log(recipe);
+
+        // update ingredients (many-to-many)
+        const usedIngredients = await Ingredient.find({ _id: {$in: recipe.ingredients} })
+
+        usedIngredients.forEach( async (ingredient) => {
+            ingredient.recipes.push(recipe._id);
+            await ingredient.save();
+        })
+
+        console.log(usedIngredients);
+
         const allRecipes = await Recipe.find({ owner: user._id });
 
         // ingredients are needed to be displayed in the recipe table
@@ -91,6 +104,19 @@ router.put("/:recipeId", async (req, res) => {
         const id = req.params.recipeId;
         let recipe = await Recipe.findByIdAndUpdate(id, req.body);
         recipe = await Recipe.findById(id);
+
+        // update ingredients (many-to-many)
+        const usedIngredients = await Ingredient.find({ _id: {$in: recipe.ingredients} })
+
+        usedIngredients.forEach( async (ingredient) => {
+            if (!ingredient.recipes.includes(recipe._id)) {
+                ingredient.recipes.push(recipe._id);
+            }
+            await ingredient.save();
+        })
+
+        console.log(usedIngredients);
+
         const ingredients = await Ingredient.find({ _id: { $in: recipe.ingredients }});
         res.render('recipes/item.ejs', { recipe, ingredients });
     } catch(err) {
