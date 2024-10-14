@@ -2,7 +2,10 @@ import './Library.css'
 
 const Library = (props) => {
     return (
-        <h3>Library here</h3>
+        <div className="bookCardsDiv">
+            <h2>Library</h2>
+            {/* Book cards will display here */}
+        </div>
     )
 }
 
