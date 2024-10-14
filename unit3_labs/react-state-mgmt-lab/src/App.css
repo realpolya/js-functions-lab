@@ -23,26 +23,3 @@ li {
   display: flex;
   flex-direction: column;
 }
-
-.fighter-cards {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.fighter-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 1rem;
-  margin: 1rem;
-  background-color: rgb(46, 105, 85);
-  border-radius: 1rem;
-}
-
-img {
-  height: 5rem;
-  width: 5rem;
-  object-fit: cover;
-  margin: 0.5rem 0;
-}

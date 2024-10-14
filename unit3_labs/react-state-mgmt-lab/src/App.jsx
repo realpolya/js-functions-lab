@@ -1,8 +1,13 @@
 import './App.css'
 import { useState } from 'react';
+import AllFighters from './AllFighters/AllFighters.jsx';
+import FighterCard from './AllFighters/FighterCard/FighterCard.jsx';
+import Money from './Money/Money.jsx';
+
 
 function App() {
 
+  // useState
   const [team, setTeam] = useState([]);
   const [money, setMoney] = useState(100);
   const [fighters, setFighters] = useState([
@@ -78,22 +83,37 @@ function App() {
     },
   ])
 
+  // functions
+  const addFighter = fighter => {
+    
+    // check balance
+    const balanceEnough = money > fighter.price ? true : false;
+    
+    // check for balance
+    if (!balanceEnough) {
+      return console.log('Not enough money');
+    } 
+    
+    // add a fighter
+    console.log('fighter is ', fighter)
+    setTeam([...team, fighter]);
+
+    // subtract from balance
+    setMoney(money - fighter.price);
+
+  }
+
+  // return
   return (
     <>
       <div className='main-page'>
+
         <h1>Zombies in Reactville!</h1>
-        <div className='fighter-cards'>
-            {fighters.map((fighter, i) => {
-              console.log(fighter.name);
-              return <ul key={i} className='fighter-card'>
-                <li>Name: {fighter.name}</li>
-                <li>Price: ${fighter.price}</li>
-                <li>Strength: {fighter.strength}</li>
-                <li>Agility: {fighter.agility}</li>
-                <li><img src={fighter.img} /></li>
-              </ul>
-            })}
-        </div>
+
+        < Money money={money}/>
+
+        <AllFighters fighters={fighters} addFighter={addFighter} />
+
       </div>
     </>
   );
