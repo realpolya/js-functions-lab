@@ -139,6 +139,7 @@ app.get("/shoes", (req, res) => {
 
 })
 
+
 /* TEST:
 
 http://localhost:3000/shoes?type=sandal
