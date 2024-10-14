@@ -9,6 +9,9 @@ const TeamMember = (fighter) => {
             <li><span>Strength:</span> {fighter.strength}</li>
             <li><span>Agility:</span> {fighter.agility}</li>
             <li><img src={fighter.img} /></li>
+            <li>
+                <button onClick={fighter.fighterAction}>Remove {fighter.name}</button>
+            </li>
         </ul>
     )
 }

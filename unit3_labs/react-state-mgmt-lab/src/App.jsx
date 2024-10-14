@@ -103,6 +103,20 @@ function App() {
 
   }
 
+  const removeFighter = fighter => {
+    
+    const newTeam = [...team];
+
+    newTeam.forEach((member, i) => {
+      if (member.name === fighter.name) {
+        newTeam.splice(i, 1);
+      }
+    })
+
+    setTeam(newTeam);
+
+  }
+
   // return
   return (
     <>
@@ -113,7 +127,10 @@ function App() {
 
         <Money money={money}/>
 
-        <Team anyoneThere={ team.length > 0 ? true : false } team={team}/>
+        <Team anyoneThere={ team.length > 0 ? true : false } 
+          team={team}
+          removeFighter={removeFighter}
+        />
 
         <AllFighters fighters={fighters} addFighter={addFighter} />
 
