@@ -1,11 +1,13 @@
+import './WeatherIcon.css';
 
-
-const WeatherIcon = () => {
+const WeatherIcon = (props) => {
+    
     return (
         <>
-            <p>Weather icon here</p>
+            <img src={props.img} alt={props.imgAlt} />
         </>
     )
+
 }
 
 export default WeatherIcon;

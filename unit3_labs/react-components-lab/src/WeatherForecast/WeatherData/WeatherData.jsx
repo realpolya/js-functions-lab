@@ -1,9 +1,11 @@
+import './WeatherData.css';
 
-
-const WeatherData = () => {
+const WeatherData = (props) => {
     return (
         <>
-            <p>Weather data here</p>
+            <h2>{props.day}</h2>
+            <p><span>conditions: </span>{props.conditions}</p>
+            <p><span>time: </span>{props.time}</p>
         </>
     )
 }

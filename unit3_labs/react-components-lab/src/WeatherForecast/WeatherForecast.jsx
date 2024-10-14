@@ -1,13 +1,15 @@
 import WeatherIcon from './WeatherIcon/WeatherIcon.jsx';
 import WeatherData from './WeatherData/WeatherData.jsx';
+import './WeatherForecast.css'
 
-const WeatherForecast = () => {
+const WeatherForecast = (props) => {
 
     return (
         <>
-            <p>weather forecast here</p>
-            < WeatherIcon />
-            < WeatherData />
+            <section className = 'forecast-card'>
+                < WeatherIcon {...props}/>
+                < WeatherData {...props}/>
+            </section>
         </>
     )
 }
