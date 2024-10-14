@@ -105,15 +105,21 @@ function App() {
 
   const removeFighter = fighter => {
     
+    // create a copy of team
     const newTeam = [...team];
 
+    // splice a copy of team
     newTeam.forEach((member, i) => {
       if (member.name === fighter.name) {
         newTeam.splice(i, 1);
       }
     })
 
+    // update team
     setTeam(newTeam);
+
+    // add from balance
+    setMoney(money + fighter.price)
 
   }
 

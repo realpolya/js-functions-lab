@@ -2,8 +2,20 @@
     background-color: rgb(114, 73, 80);
     border-radius: 1rem;
     display: flex;
+    flex-direction: column;
+}
+
+.team-cards {
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+
+.team-stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 1rem;
 }
 
 .message {
