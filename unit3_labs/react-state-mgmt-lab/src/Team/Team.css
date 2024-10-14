@@ -1,5 +1,12 @@
 .team-div {
     background-color: rgb(114, 73, 80);
     border-radius: 1rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.message {
     text-align: center;
+    width: 100%;
 }

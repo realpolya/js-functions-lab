@@ -1,12 +1,16 @@
 import './Team.css'
-import FighterCard from '../AllFighters/FighterCard/FighterCard.jsx';
+import TeamMember from './TeamMember/TeamMember.jsx';
 
 const Team = (props) => {
 
     return (
         <>
             <div className='team-div'>
-                <p>{ props.anyonerThere ? 'Your team:' : 'Get some team members' }</p>
+                <p className="message">{ props.anyoneThere ? 'Your team:' : 'Get some team members' }</p>
+
+                {props.team.map((fighter, i) => {
+                    return < TeamMember key={i} {...fighter}/>
+                })}
             </div>
         </>
     )

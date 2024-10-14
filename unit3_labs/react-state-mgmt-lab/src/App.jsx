@@ -111,9 +111,9 @@ function App() {
 
         <h1>Zombies in Reactville!</h1>
 
-        < Money money={money}/>
+        <Money money={money}/>
 
-        < Team anyoneThere={ team.length > 0 ? true : false } />
+        <Team anyoneThere={ team.length > 0 ? true : false } team={team}/>
 
         <AllFighters fighters={fighters} addFighter={addFighter} />
 

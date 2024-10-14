@@ -10,20 +10,19 @@ const AllFighters = (props) => {
         <>
             <div className='fighter-cards'>
                 
-                {console.log(props.fighters)}
                 {props.fighters.map((fighter, i) => {
                 
-                return < FighterCard 
-                    key={i} {...fighter} 
-                    fighterAction={() => {props.addFighter(fighter)}}
-                />
+                    return < FighterCard 
+                        key={i} {...fighter} 
+                        fighterAction={() => {props.addFighter(fighter)}}
+                    />
 
                 })}
 
             </div>
         </>
     )
-    
+
 }
 
 export default AllFighters;
