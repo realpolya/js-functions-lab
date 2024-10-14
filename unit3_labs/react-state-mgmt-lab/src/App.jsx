@@ -3,7 +3,7 @@ import { useState } from 'react';
 import AllFighters from './AllFighters/AllFighters.jsx';
 import FighterCard from './AllFighters/FighterCard/FighterCard.jsx';
 import Money from './Money/Money.jsx';
-
+import Team from './Team/Team.jsx';
 
 function App() {
 
@@ -106,15 +106,19 @@ function App() {
   // return
   return (
     <>
+
       <div className='main-page'>
 
         <h1>Zombies in Reactville!</h1>
 
         < Money money={money}/>
 
+        < Team anyoneThere={ team.length > 0 ? true : false } />
+
         <AllFighters fighters={fighters} addFighter={addFighter} />
 
       </div>
+
     </>
   );
 
