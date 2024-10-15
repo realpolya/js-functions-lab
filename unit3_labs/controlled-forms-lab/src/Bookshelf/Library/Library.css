@@ -1,0 +1,10 @@
+.book-card {
+    background-color: green;
+    border-radius: 1rem;
+    padding: .5rem;
+    margin: .5rem;
+}
+
+span {
+    color: black;
+}
