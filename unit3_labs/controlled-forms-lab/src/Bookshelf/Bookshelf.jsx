@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './Bookshelf.css';
-import AddBook from './AddBook/AddBook.jsx';
+import AddBookForm from './AddBookForm/AddBookForm.jsx';
 import Library from './Library/Library.jsx';
 
 const Bookshelf = () => {
@@ -11,35 +11,31 @@ const Bookshelf = () => {
         author: ''
     });  
 
-    // functions TODO:
-    const addBookFn = e => {
-    
-        // check balance
-        const balanceEnough = money > fighter.price ? true : false;
-        
-        // check for balance
-        if (!balanceEnough) {
-          return console.log('Not enough money');
-        } 
-        
-        // add a fighter
-        console.log('fighter is ', fighter)
-        setTeam([...team, fighter]);
-    
-        // subtract from balance
-        setMoney(money - fighter.price);
-    
-      }
+    const handleNewBook = e => setNewBook({...newBook, [e.target.name]: e.target.value });
+    const addBook = (newBook) => setBooks([...books, newBook]);
 
-    const handleAddBook = () => {
+    const handleSubmit = e => {
 
+        // prevent navigation away from the page
+        e.preventDefault();
+        console.log("handling submit");
+    
+        // update library collection
+        addBook(newBook);
+    
+        // clear formData
+        setNewBook({title:'', author:''});
+    
     }
 
     return (
         
         <div className="bookshelf-div">
-            < AddBook />
-            < Library />
+            < AddBookForm
+                newBook={newBook}
+                handleSubmit={handleSubmit}
+                handleNewBook={handleNewBook} />
+            < Library books={books}/>
         </div>
         
     )
