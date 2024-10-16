@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import IngredientList from './components/IngredientList.jsx';
+import BurgerStack from './components/BurgerStack.jsx';
 
 export const availableIngredients = [
   { name: 'Kaiser Bun', color: 'saddlebrown' },
@@ -26,8 +27,14 @@ function App() {
   /* functions */
   const addIngredient = (e) => {
     console.log('clicking')
+    console.log(e.target.value);
+    console.log(typeof(e.target.value))
     setStack([...stack, e.target.value]);
     console.log(stack);
+  }
+
+  const removeIngredient = (e) => {
+    console.log('remove ingredient');
   }
 
   return (
@@ -35,6 +42,7 @@ function App() {
       <h1>Stacking Burgers</h1>
       <section>
         < IngredientList addIngredient={addIngredient}/>
+        < BurgerStack stack={stack} removeIngredient={removeIngredient}/>
       </section>
     </main>
   )
