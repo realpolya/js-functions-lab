@@ -10,7 +10,7 @@ function App() {
     const [starships, setStarships] = useState([]);
 
     /* functions */
-    const fetchDefaultData = async (starship) => {
+    const fetchData = async (starship) => {
 
         // fetch data
         const data = await show(starship);
@@ -39,15 +39,15 @@ function App() {
       let starship = '';
 
       // call the function
-      fetchDefaultData(starship);
+      fetchData(starship);
 
     }, [])
 
     return (
       <>
         <h1 id='root-title'>SWAPI Fetching Data Lab</h1>
+        < Search fetchData={fetchData} />
         < List starships={starships} />
-        < Search />
       </>
     )
 }

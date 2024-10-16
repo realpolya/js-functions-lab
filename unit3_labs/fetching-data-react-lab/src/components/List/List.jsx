@@ -3,14 +3,14 @@ import './List.css';
 
 function List({ starships }) {
   return (
-    <div id='starships-list'>
+    <section id='starships-list'>
         <h3 id='starships-list-head'> List of Starships</h3>
         <div id='starships-div'>
         {starships.map((starship, i) => {
           return < Card key={i} starship={starship} />
         })}
         </div>
-    </div>
+    </section>
   )
 }
 
