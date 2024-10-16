@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './App.css'
+import IngredientList from './components/IngredientList.jsx';
 
 export const availableIngredients = [
   { name: 'Kaiser Bun', color: 'saddlebrown' },
@@ -19,13 +20,21 @@ export const availableIngredients = [
 ];
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [stack, setStack] = useState([])
+
+  /* functions */
+  const addIngredient = (e) => {
+    console.log('clicking')
+    setStack([...stack, e.target.value]);
+    console.log(stack);
+  }
 
   return (
     <main>
       <h1>Stacking Burgers</h1>
       <section>
-      
+        < IngredientList addIngredient={addIngredient}/>
       </section>
     </main>
   )

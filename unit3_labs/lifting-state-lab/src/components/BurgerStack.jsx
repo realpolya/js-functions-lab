@@ -1,3 +1,4 @@
+import { availableIngredients } from "../App.jsx"
 
 function BurgerStack(props) {
   return (
