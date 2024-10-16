@@ -10,7 +10,7 @@ function BurgerStack(props) {
                 >
 
                     <button
-                    value={ingredient}
+                    value={JSON.stringify(ingredient)}
                     type='submit'
                     onClick={props.removeIngredient}
                     style={{backgroundColor: ingredient.color, 

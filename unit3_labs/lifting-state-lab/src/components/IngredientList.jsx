@@ -11,7 +11,7 @@ function IngredientList({ addIngredient }) {
                 >
 
                     <button
-                    value={ingredient}
+                    value={JSON.stringify(ingredient)}
                     type='submit'
                     onClick={addIngredient}
                     style={{backgroundColor: ingredient.color, 

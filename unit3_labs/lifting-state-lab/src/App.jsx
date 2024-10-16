@@ -26,11 +26,12 @@ function App() {
 
   /* functions */
   const addIngredient = (e) => {
+    
     console.log('clicking')
     console.log(e.target.value);
-    console.log(typeof(e.target.value))
-    setStack([...stack, e.target.value]);
-    console.log(stack);
+    let newIngredient = JSON.parse(e.target.value);
+    setStack([...stack, newIngredient]);
+
   }
 
   const removeIngredient = (e) => {
