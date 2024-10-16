@@ -1,27 +1,19 @@
-import { availableIngredients } from "../App.jsx"
+import { availableIngredients } from "../App.jsx";
+import Ingredient from './Ingredient.jsx';
 
 function IngredientList({ addIngredient }) {
     
-  return (
-    <ul id="ingredient-list">
-        {availableIngredients.map((ingredient, i) => {
-            return <li 
-                key={i}
-                style={{backgroundColor: ingredient.color}}
-                >
-
-                    <button
-                    value={JSON.stringify(ingredient)}
-                    type='submit'
-                    onClick={addIngredient}
-                    style={{backgroundColor: ingredient.color, 
-                        color: ingredient.name === 'Onion' ? 'black' : 'white'}}
-                    >{ingredient.name}</button>
-                    
-                </li>
-        })}
-    </ul>
-  )
+    return (
+        <ul id="ingredient-list">
+            {availableIngredients.map((ingredient, i) => {
+                return < Ingredient key={i} ingredient={ingredient} 
+                    i={i} 
+                    ingrAction={addIngredient} />
+            })}
+        </ul>
+    )
 }
 
 export default IngredientList
+
+// ingredient.name === 'Onion' ? 'black' : 'white'

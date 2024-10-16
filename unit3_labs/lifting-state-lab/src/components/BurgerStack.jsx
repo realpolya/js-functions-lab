@@ -1,23 +1,13 @@
-import { availableIngredients } from "../App.jsx"
+import './BurgerStack.css';
+import Ingredient from './Ingredient.jsx';
 
 function BurgerStack(props) {
   return (
-    <ul>
+    <ul className='burger-stack'>
         {props.stack.map((ingredient, i) => {
-            return <li 
-                key={i}
-                style={{backgroundColor: ingredient.color}}
-                >
-
-                    <button
-                    value={JSON.stringify(ingredient)}
-                    type='submit'
-                    onClick={props.removeIngredient}
-                    style={{backgroundColor: ingredient.color, 
-                        color: ingredient.name === 'Onion' ? 'black' : 'white'}}
-                    >{ingredient.name}</button>
-                    
-                </li>
+            return < Ingredient ingredient={ingredient} 
+            i={i} key={i}
+            ingrAction={props.removeIngredient} />
         })}
     </ul>
   )

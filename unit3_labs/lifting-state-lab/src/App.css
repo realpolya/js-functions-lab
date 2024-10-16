@@ -52,7 +52,7 @@ ul {
   height: 100%;
 
   margin: 0;
-  padding: 16px;
+  padding: 1rem;
   list-style: none;
 
   display: flex;
@@ -61,7 +61,7 @@ ul {
 }
 
 li {
-  padding: .4rem;
+  padding: 0;
   margin-bottom: .2rem;
   border-radius: .5rem;
   font-weight: bold;
@@ -73,7 +73,6 @@ li {
 
 button {
   cursor: pointer;
-  border-radius: 8px;
   background-color: transparent;
   border: 1px solid transparent;
   width: 100%;
