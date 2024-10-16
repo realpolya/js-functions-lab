@@ -1,3 +1,7 @@
+#starships-list {
+    width: 100%;
+}
+
 #starships-list-head {
     text-align: center;
 }
@@ -6,4 +10,6 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
 }

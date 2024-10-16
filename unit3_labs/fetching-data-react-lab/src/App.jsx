@@ -20,6 +20,7 @@ function App() {
           
           return {
             name: result.name,
+            class: result.starship_class,
             model: result.model,
             manufacturer: result.manufacturer,
           }
@@ -44,7 +45,7 @@ function App() {
 
     return (
       <>
-        <h1>Fetching Data Lab</h1>
+        <h1 id='root-title'>SWAPI Fetching Data Lab</h1>
         < List starships={starships} />
         < Search />
       </>

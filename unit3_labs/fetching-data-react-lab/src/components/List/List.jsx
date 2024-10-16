@@ -3,7 +3,7 @@ import './List.css';
 
 function List({ starships }) {
   return (
-    <div className='starships-list'>
+    <div id='starships-list'>
         <h3 id='starships-list-head'> List of Starships</h3>
         <div id='starships-div'>
         {starships.map((starship, i) => {
