@@ -26,16 +26,42 @@ function App() {
 
   /* functions */
   const addIngredient = (e) => {
-    
-    console.log('clicking')
-    console.log(e.target.value);
+
+    console.log('adding ingredient');
+
+    // ingredient to be added
     let newIngredient = JSON.parse(e.target.value);
+
+    // update stack
     setStack([...stack, newIngredient]);
 
   }
 
   const removeIngredient = (e) => {
-    console.log('remove ingredient');
+
+    console.log('removing ingredient');
+
+    // ingredient to be removed
+    let ingrRemoved = JSON.parse(e.target.value);
+
+    // const count
+    let count = 0;
+
+    // filter array
+    const newStack = stack.filter(ingr => {
+      
+      if ((ingr.name === ingrRemoved.name) && !count) {
+          count++;
+          return false;
+      }
+
+      return true;
+
+    });
+
+    // update stack
+    setStack(newStack);
+
   }
 
   return (
