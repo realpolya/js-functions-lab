@@ -1,0 +1,9 @@
+#starships-list-head {
+    text-align: center;
+}
+
+#starships-div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

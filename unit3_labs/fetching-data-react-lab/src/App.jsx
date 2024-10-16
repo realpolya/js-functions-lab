@@ -45,7 +45,7 @@ function App() {
     return (
       <>
         <h1>Fetching Data Lab</h1>
-        < List />
+        < List starships={starships} />
         < Search />
       </>
     )
