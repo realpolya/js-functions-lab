@@ -12,7 +12,7 @@ import './App.css'
 
 
 function App() {
-  // const [count, setCount] = useState(0)
+  const [mailboxes, setMailboxes] = useState([])
 
   return (
     <>
@@ -20,6 +20,11 @@ function App() {
       < NavBar />
       <Routes>
         <Route path='/' element={<h1>Home Page</h1>} />
+
+        <Route path='/list' element={< List />} />
+
+        <Route path='/new' element={< Form />} />
+
       </Routes>
     </>
   )
