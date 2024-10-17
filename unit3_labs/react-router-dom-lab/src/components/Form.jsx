@@ -1,7 +1,7 @@
 
 function Form() {
   return (
-    <div>Form</div>
+    <main>Form</main>
   )
 }
 

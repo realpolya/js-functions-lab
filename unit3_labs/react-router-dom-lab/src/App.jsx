@@ -57,7 +57,7 @@ function App() {
       <h1>React Router DOM Lab</h1>
       < NavBar />
       <Routes>
-        <Route path='/' element={<h1>Home Page</h1>} />
+        <Route path='/' element={<main>Home Page</main>} />
 
         <Route path='/list' element={< List mailboxes={mailboxes}/>} />
 

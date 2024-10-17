@@ -1,5 +1,5 @@
 #mailboxes-list-main {
-    margin: 1rem;
+    margin: 0 1rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -9,11 +9,12 @@
 .mailbox-card {
     display: flex;
     flex-direction: column;
-    margin: 2rem;
+    margin: 0 1rem;
     background-color: pink;
     color: black;
     padding: 1rem;
     border-radius: 1rem;
+    max-height: 50%;
 }
 
 span {
