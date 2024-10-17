@@ -1,0 +1,21 @@
+#mailboxes-list-main {
+    margin: 1rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+.mailbox-card {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem;
+    background-color: pink;
+    color: black;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+span {
+    color: magenta;
+}

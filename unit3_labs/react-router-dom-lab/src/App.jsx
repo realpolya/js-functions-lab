@@ -10,9 +10,47 @@ import Item from './components/Item.jsx';
 // css
 import './App.css'
 
+class Mailbox {
+
+  constructor(boxholder, boxSize, array) {
+      
+      this._id = this.incrementId(array);
+      this.boxholder = boxholder;
+      this.boxSize  = boxSize;
+
+  }
+
+  incrementId(array) {
+
+      return array.length + 1;
+
+  }
+
+}
+
+const example = [];
+
+const mailbox1 = new Mailbox('Liza', 'small', example);
+example.push(mailbox1);
+const mailbox2 = new Mailbox('Dima', 'large', example);
+example.push(mailbox2);
 
 function App() {
-  const [mailboxes, setMailboxes] = useState([])
+
+  console.log(example);
+  const [mailboxes, setMailboxes] = useState(example);
+
+
+  const addMailbox = data => {
+
+    // create new instance of Mailbox
+    const newMailbox = new Mailbox(data.boxholder, data.boxSize, mailboxes);
+
+    // update state
+    return setMailboxes([...mailboxes, newMailbox]);
+
+  }
+
 
   return (
     <>
@@ -21,9 +59,9 @@ function App() {
       <Routes>
         <Route path='/' element={<h1>Home Page</h1>} />
 
-        <Route path='/list' element={< List />} />
+        <Route path='/list' element={< List mailboxes={mailboxes}/>} />
 
-        <Route path='/new' element={< Form />} />
+        <Route path='/new' element={< Form addMailbox={addMailbox} />} />
 
       </Routes>
     </>
