@@ -14,6 +14,9 @@ function NavBar() {
             <li>
                 <Link to='/new'>New mailbox</Link>
             </li>
+            <li>
+                <Link to='/letter'>New letter</Link>
+            </li>
         </ul>
     </nav>
   )

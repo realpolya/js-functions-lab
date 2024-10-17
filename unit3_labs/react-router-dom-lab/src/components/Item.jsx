@@ -16,6 +16,12 @@ function Item({ mailboxes }) {
                 <p><span>Boxholder:</span> {mailbox.boxholder}</p>
                 <p><span>Box size:</span> {mailbox.boxSize}</p>
             </div>
+            <div id="letters-item">
+                <h3>Letters to {mailbox.boxholder}</h3>
+                {mailbox.letters.map(letter => {
+                    return <p className='letter-text'>{letter}</p>
+                })}
+            </div>
         </main>
   )
 }

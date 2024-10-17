@@ -7,6 +7,7 @@ class Mailbox {
       this._id = this.incrementId(array);
       this.boxholder = boxholder;
       this.boxSize  = boxSize;
+      this.letters = [];
 
   }
 
@@ -23,5 +24,7 @@ const mailbox1 = new Mailbox('Liza', sizes[0], example);
 example.push(mailbox1);
 const mailbox2 = new Mailbox('Dima', sizes[3], example);
 example.push(mailbox2);
+const mailbox3 = new Mailbox('Amber', sizes[1], example);
+example.push(mailbox3);
 
 export {sizes, Mailbox, example}

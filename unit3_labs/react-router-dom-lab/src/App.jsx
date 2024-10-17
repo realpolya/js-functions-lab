@@ -7,6 +7,8 @@ import NavBar from './components/NavBar.jsx';
 import Form from './components/Form.jsx';
 import List from './components/List.jsx';
 import Item from './components/Item.jsx';
+import Letter from './components/Letter.jsx';
+
 
 // css
 import './App.css'
@@ -17,9 +19,7 @@ import {sizes, Mailbox, example} from './data/data.js';
 
 function App() {
 
-  console.log(example);
   const [mailboxes, setMailboxes] = useState(example);
-
 
   const addMailbox = data => {
 
@@ -28,6 +28,19 @@ function App() {
 
     // update state
     return setMailboxes([...mailboxes, newMailbox]);
+
+  }
+
+  const addLetter = data => {
+
+    // find inside the mailbox
+    const mailbox = mailboxes.find(box => Number(box._id) === Number(data.address));
+
+    // push letter into the mailbox array
+    mailbox.letters.push(data.content);
+
+    // FIXME: is this a correct way to do it?
+    return setMailboxes(mailboxes);
 
   }
 
@@ -45,6 +58,8 @@ function App() {
         <Route path='/list' element={< List mailboxes={mailboxes}/>} />
 
         <Route path='/new' element={< Form addMailbox={addMailbox} sizes={sizes} />} />
+        
+        <Route path='/letter' element={< Letter mailboxes={mailboxes} addLetter={addLetter}/>} />
 
         <Route path='/item/:id' element={< Item mailboxes={mailboxes} />} />
 
