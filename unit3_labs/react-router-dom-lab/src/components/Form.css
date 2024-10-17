@@ -1,0 +1,34 @@
+#form-main {
+    background-color: rgb(29, 131, 97);
+    padding: 0 1rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+}
+
+.new-mailbox-form {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.new-mailbox-form-div {
+    margin: 1rem 0;
+}
+
+label {
+    margin: 0 1rem 0 0;
+}
+
+select {
+    height: 2rem;
+    width: 50%;
+}
+
+input {
+    height: 1.5rem;
+}

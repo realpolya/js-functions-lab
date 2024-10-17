@@ -1,0 +1,28 @@
+#item-main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#mailbox-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 1rem;
+    background-color: pink;
+    color: black;
+    padding: 1rem;
+    border-radius: 1rem;
+    max-height: 50%;
+    margin-bottom: 1rem;
+    height: 15rem;
+    width: 15rem;
+}
+
+@media (max-width: 550px) {
+    #mailbox-item {
+        height: 10rem;
+        width: 10rem;
+    }
+}
