@@ -8,7 +8,7 @@ import logger from 'morgan';
 import db from './db/connection.js'; // db = mongoose.connection
 
 // routes
-// import petRouter from './routes/route-pets.js';
+import trackRouter from './routes/route-tracks.js';
 
 /* --------------------------------Express & Mongoose--------------------------------*/
 
@@ -34,4 +34,4 @@ app.use(logger('dev'));
 
 /* --------------------------------Routes--------------------------------*/
 
-// app.use('/pets', petRouter);
+app.use('/tracks', trackRouter);
