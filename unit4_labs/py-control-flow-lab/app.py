@@ -16,8 +16,7 @@ def print_greeting():
     if python_is_fun:
         print("Python is fun!")
 
-# Call the function
-print_greeting()
+# print_greeting()
 
 
 # Exercise 1: Vowel or Consonant
@@ -47,7 +46,7 @@ def check_letter():
     else:
         print(f"Letter '{letter}' is a consonant")
 
-check_letter()
+# check_letter()
 
 # Exercise 2: Old enough to vote?
 #
@@ -87,8 +86,7 @@ def check_voting_eligibility():
     else:
         print('Not allowed to vote')
 
-# Call the function
-check_voting_eligibility()
+# check_voting_eligibility()
 
 
 # Exercise 3: Calculate Dog Years
@@ -136,7 +134,7 @@ def calculate_dog_years():
     print(f"Dog's age in dog years is {dog_years}.")
 
 
-calculate_dog_years()
+# calculate_dog_years()
 
 
 # Exercise 4: Weather Advice
@@ -158,12 +156,37 @@ calculate_dog_years()
 print('---------------exercise 4----------------')
 
 def weather_advice():
-    # Your control flow logic goes here
-    print('lovely')
 
+    cold = None
+    rain = None
+    answers = ["yes", "no"]
 
-# Call the function
-weather_advice()
+    while cold not in answers:
+        cold = input("Is it cold today? (yes/no) ")
+
+    if cold == "yes":
+        cold = True
+    elif cold == "no":
+        cold = False
+
+    while rain not in answers:
+        rain = input("Is it raining today? (yes/no) ")
+
+    if rain == "yes":
+        rain = True
+    elif rain == "no":
+        rain = False
+    
+    if rain and cold:
+        print("Wear a waterproof coat.")
+    elif cold and not rain:
+        print("Wear a warm coat.")
+    elif rain and not cold:
+        print("Carry an umbrella.")
+    else:
+        print("Wear light clothing.")
+
+# weather_advice()
 
 
 # Exercise 5: What's the Season?
@@ -188,13 +211,67 @@ weather_advice()
 print('---------------exercise 5----------------')
 
 def determine_season():
-    # Your control flow logic goes here
-    print('lovely')
+    fall_months = ('Sep', 'Oct', 'Nov', 'Dec')
+    winter_months = ('Dec', 'Jan', 'Feb', 'Mar')
+    spring_months = ('Mar', 'Apr', 'May', 'Jun')
+    summer_months = ('Jun', 'Jul', 'Aug', 'Sep')
+
+    month = None
+    day = 0
+
+    while month not in (fall_months + winter_months + spring_months + summer_months):
+        month = input("Enter the month of the year (Jan - Dec):")
+
+    while isinstance(day, str) or day <= 0 or day > 31:
+        day = input("Enter the day of the month:")
+        try: 
+            day = int(day)
+            if (day < 0):
+                print("Negative numbers not allowed")
+        except:
+            print('Not a number')
+    
+    season = None
+
+    if month in fall_months:
+
+        if month in winter_months: # Dec
+            if day < 21:
+                season = "fall"
+            else:
+                season = "winter"
+        elif month in summer_months: # Sep
+            if day > 21:
+                season = "fall"
+            else:
+                season = "summer"
+        else:
+            season = "fall"
+
+    elif month in spring_months:
+
+        if month in winter_months: # Mar
+            if day > 19:
+                season = "spring"
+            else:
+                season = "winter"
+        elif month in summer_months: # Jun
+            if day < 21:
+                season = "spring"
+            else:
+                season = "summer"
+        else:
+            season = "spring"
+
+    elif month in summer_months:
+        season = "summer"
+    elif month in winter_months:
+        season = "winter"
 
 
-# Call the function
+    print(f"{day} of {month} is {season}")
+
 determine_season()
-
 
 # Exercise 7: Number Guessing Game
 #
@@ -223,4 +300,3 @@ def guess_number():
 
 # Call the function
 guess_number()
-
