@@ -16,7 +16,7 @@ def print_greeting():
     if python_is_fun:
         print("Python is fun!")
 
-# print_greeting()
+print_greeting()
 
 
 # Exercise 1: Vowel or Consonant
@@ -46,7 +46,7 @@ def check_letter():
     else:
         print(f"Letter '{letter}' is a consonant")
 
-# check_letter()
+check_letter()
 
 # Exercise 2: Old enough to vote?
 #
@@ -86,7 +86,7 @@ def check_voting_eligibility():
     else:
         print('Not allowed to vote')
 
-# check_voting_eligibility()
+check_voting_eligibility()
 
 
 # Exercise 3: Calculate Dog Years
@@ -134,7 +134,7 @@ def calculate_dog_years():
     print(f"Dog's age in dog years is {dog_years}.")
 
 
-# calculate_dog_years()
+calculate_dog_years()
 
 
 # Exercise 4: Weather Advice
@@ -186,7 +186,7 @@ def weather_advice():
     else:
         print("Wear light clothing.")
 
-# weather_advice()
+weather_advice()
 
 
 # Exercise 5: What's the Season?
