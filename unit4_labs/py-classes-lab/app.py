@@ -23,26 +23,123 @@ AAU, I should see a message at the end of the game indicating the winner or
 stating that the game ended in a tie.
 """
 
+bs = "\033[34m"
+bf = "\033[0m"
+
+gs = "\033[32m"
+gf = "\033[0m"
+
 class Game():
+    turns = ['X', 'O']
 
     def __init__(self):
         self.board = self.build_board()
-        self.turn = 'X'
+        self.turn = self.__class__.turns[0]
         self.tie = False
         self.winner = False
     
+
     def build_board(self):
-        board = {}
         letters = ['a', 'b', 'c']
+        board = {}
         for n in range(3):
             for m in range(3):
                 key = letters[n] + str(m+1)
-                board[key] = None
+                board[key] = ' '
+        b = list(board.items()) # list of tuples
         return board
     
+
     def __str__(self):
         return f"The board is {self.board}"
+    
 
+    def change_turn(self):
+        if self.turn == self.__class__.turns[0]:
+            self.turn = self.__class__.turns[1]
+            return print(f"Now it's the turn of {self.turn}")
+        self.turn = self.__class__.turns[0]
+        return print(f"Now it's the turn of {self.turn}")
+    
+    def make_move(self):
+        move = None
+        available = False
+        while move not in self.board.keys() or not available:
+            move = input(f"{gs}Enter a valid move (example: A1): {gf}").lower()
+            if move in self.board.keys():
+                available = self.check_move(move)
+                if not available:
+                    print("The cell is already taken, choose another option")
+        print(f"Move for {self.turn} is {move}")
+        self.board[move] = self.turn
+        return move
+
+    def start_game(self):
+        
+        print(' ')
+        print(f'{bs}--------------Welcome to Tic Tac Toe---------------{bf}')
+        self.print_board()
+
+        print(f"Now it's the turn of {self.turn}")
+
+        while not self.winner or self.tie: 
+            move = self.make_move()
+            self.print_board()
+            self.change_turn()
+
+
+        # available = self.check_move(move)
+        # if not available:
+        #     print("The cell is already taken, choose another option")
+        
+
+
+            
+    def check_move(self, move):
+        current = self.board[move]
+        if current != " ":
+            return False
+        return True
+
+    def check_winner(self):
+        b = self.board
+        count = 0
+
+        # get keys with the identical values (X or O)
+
+        # if the keys are matching a pattern
+
+        # pattern (number has the same symbol three times, 
+        # letter has a symbol three times,
+        # none of the numbers and letters match)
+
+        # assign a winner
+
+        # check for each turn
+        # for turn in self.__class__.turns:
+        #     for key, val in b.items():
+
+    
+    # def check_tie(self):
+    #     # if no empty cells and no winner
+
+    #     # declare tie
+
+    def print_board(self):
+
+        b = self.board
+
+        print(f'''
+           |  {gs}A{gf}  |  {gs}B{gf}  |  {gs}C{gf}  |
+        -----------------------
+        1  |  {b["a1"]}  |  {b["b1"]}  |  {b["c1"]}  |
+        -----------------------
+        2  |  {b["a2"]}  |  {b["b2"]}  |  {b["c2"]}  |
+        -----------------------
+        3  |  {b["a3"]}  |  {b["b3"]}  |  {b["c3"]}  |
+        -----------------------
+        ''')
 
 first_game = Game()
-print(first_game)
+# print(first_game)
+first_game.start_game()
