@@ -24,10 +24,12 @@ stating that the game ended in a tie.
 """
 
 bs = "\033[34m"
-bf = "\033[0m"
-
 gs = "\033[32m"
-gf = "\033[0m"
+ys = "\033[33m"
+rs = "\033[31m"
+ps = "\033[35m"
+ws = "\033[0m"
+f = "\033[30m" # 0m default
 
 class Game():
     turns = ['X', 'O']
@@ -54,30 +56,30 @@ class Game():
     def change_turn(self):
         if self.turn == self.__class__.turns[0]:
             self.turn = self.__class__.turns[1]
-            return print(f"Now it's the turn of {self.turn}")
+            return print(f"{ys}Now it's the turn of {self.turn}{f}")
         self.turn = self.__class__.turns[0]
-        return print(f"Now it's the turn of {self.turn}")
+        return print(f"{ys}Now it's the turn of {self.turn}{f}")
     
     def make_move(self):
         move = None
         available = False
         while move not in self.board.keys() or not available:
-            move = input(f"{gs}Enter a valid move (example: A1): {gf}").lower()
+            move = input(f"{gs}Enter a valid move (example: A1): {f}").lower()
             if move in self.board.keys():
                 available = self.check_move(move)
                 if not available:
                     print("The cell is already taken, choose another option")
-        print(f"Move for {self.turn} is {move}")
+        print(f"{ps}Move for {self.turn} is {move}{f}")
         self.board[move] = self.turn
         return move
 
     def play(self):
         
         print(' ')
-        print(f'{bs}--------------Welcome to Tic Tac Toe---------------{bf}')
+        print(f'{ps}--------------Welcome to Tic Tac Toe---------------{f}')
         self.print_board()
 
-        print(f"Now it's the turn of {self.turn}")
+        print(f"{ys}Now it's the turn of {self.turn}{f}")
 
         while not (self.winner or self.tie): 
             move = self.make_move()
@@ -94,7 +96,7 @@ class Game():
                     self.change_turn()
 
     def print_winner(self):
-        print(f"Player {self.winner} won!")
+        print(f"{rs}Player {self.winner} won!{f}")
             
     def check_move(self, move):
         current = self.board[move]
@@ -110,12 +112,18 @@ class Game():
         # check for each turn
         for turn in self.__class__.turns:
 
+            combo1 = ['a1', 'b2', 'c3']
+            combo2 = ['a3', 'b2', 'c1']
+            cells = []
             count = []
             for n in range(6):
                 count.append(0)
-                
-            #TODO: add diagonal cases
+
             for key, val in b.items():
+
+                if val == turn:
+                    cells.append(key)
+
                 if "a" in key and val == turn:
                     count[0] += 1
                 if "b" in key and val == turn:
@@ -130,8 +138,7 @@ class Game():
                 if "3" in key and val == turn:
                     count[5] += 1
                 
-                if 3 in count or all(x == 1 for x in count):
-                    print("Found winner")
+                if 3 in count or (all(cell in cells for cell in combo1)) or (all(cell in cells for cell in combo2)):
                     winner = turn
                     break
             
@@ -167,16 +174,15 @@ class Game():
         b = self.board
 
         print(f'''
-           |  {gs}A{gf}  |  {gs}B{gf}  |  {gs}C{gf}  |
+           |  {gs}A{f}  |  {gs}B{f}  |  {gs}C{f}  |
         -----------------------
-        {bs}1{bf}  |  {b["a1"]}  |  {b["b1"]}  |  {b["c1"]}  |
+        {bs}1{f}  |  {ws}{b["a1"]}{f}  |  {ws}{b["b1"]}{f}  |  {ws}{b["c1"]}{f}  |
         -----------------------
-        {bs}2{bf}  |  {b["a2"]}  |  {b["b2"]}  |  {b["c2"]}  |
+        {bs}2{f}  |  {ws}{b["a2"]}{f}  |  {ws}{b["b2"]}{f}  |  {ws}{b["c2"]}{f}  |
         -----------------------
-        {bs}3{bf}  |  {b["a3"]}  |  {b["b3"]}  |  {b["c3"]}  |
+        {bs}3{f}  |  {ws}{b["a3"]}{f}  |  {ws}{b["b3"]}{f}  |  {ws}{b["c3"]}{f}  |
         -----------------------
         ''')
 
 first_game = Game()
-# print(first_game)
 first_game.play()
