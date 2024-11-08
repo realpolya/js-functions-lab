@@ -38,7 +38,6 @@ class Game():
         self.tie = False
         self.winner = False
     
-
     def build_board(self):
         letters = ['a', 'b', 'c']
         board = {}
@@ -49,11 +48,9 @@ class Game():
         b = list(board.items()) # list of tuples
         return board
     
-
     def __str__(self):
         return f"The board is {self.board}"
     
-
     def change_turn(self):
         if self.turn == self.__class__.turns[0]:
             self.turn = self.__class__.turns[1]
@@ -74,7 +71,7 @@ class Game():
         self.board[move] = self.turn
         return move
 
-    def start_game(self):
+    def play(self):
         
         print(' ')
         print(f'{bs}--------------Welcome to Tic Tac Toe---------------{bf}')
@@ -82,18 +79,22 @@ class Game():
 
         print(f"Now it's the turn of {self.turn}")
 
-        while not self.winner or self.tie: 
+        while not (self.winner or self.tie): 
             move = self.make_move()
             self.print_board()
-            self.change_turn()
+            winner = self.check_winner()
+            if winner:
+                self.set_winner(winner)
+                self.print_winner()
+            else:
+                tie = self.check_tie()
+                if tie:
+                    self.set_tie()
+                else:
+                    self.change_turn()
 
-
-        # available = self.check_move(move)
-        # if not available:
-        #     print("The cell is already taken, choose another option")
-        
-
-
+    def print_winner(self):
+        print(f"Player {self.winner} won!")
             
     def check_move(self, move):
         current = self.board[move]
@@ -102,28 +103,63 @@ class Game():
         return True
 
     def check_winner(self):
+
         b = self.board
-        count = 0
-
-        # get keys with the identical values (X or O)
-
-        # if the keys are matching a pattern
-
-        # pattern (number has the same symbol three times, 
-        # letter has a symbol three times,
-        # none of the numbers and letters match)
-
-        # assign a winner
+        winner = None
 
         # check for each turn
-        # for turn in self.__class__.turns:
-        #     for key, val in b.items():
+        for turn in self.__class__.turns:
 
+            count = []
+            for n in range(6):
+                count.append(0)
+
+            for key, val in b.items():
+                if "a" in key and val == turn:
+                    count[0] += 1
+                if "b" in key and val == turn:
+                    count[1] += 1
+                if "c" in key and val == turn:
+                    count[2] += 1
+                
+                if "1" in key and val == turn:
+                    count[3] += 1
+                if "2" in key and val == turn:
+                    count[4] += 1
+                if "3" in key and val == turn:
+                    count[5] += 1
+                
+                if 3 in count or all(x == 1 for x in count):
+                    print("Found winner")
+                    winner = turn
+                    break
+            
+            if winner:
+                break
+
+        return winner
+
+    def set_winner(self, winner):
+        self.winner = winner
     
-    # def check_tie(self):
-    #     # if no empty cells and no winner
+    def set_tie(self):
+        self.tie = True
+    
+    def check_tie(self):
+        # if no empty cells and no winner
+        b = self.board
+        full = True
 
-    #     # declare tie
+        for key, val in b.items():
+            if val == ' ':
+                full = False
+                break
+        
+        if full and not self.winner:
+            print("Game over. It is a tie!")
+            return True
+        else:
+            return False
 
     def print_board(self):
 
@@ -132,14 +168,14 @@ class Game():
         print(f'''
            |  {gs}A{gf}  |  {gs}B{gf}  |  {gs}C{gf}  |
         -----------------------
-        1  |  {b["a1"]}  |  {b["b1"]}  |  {b["c1"]}  |
+        {bs}1{bf}  |  {b["a1"]}  |  {b["b1"]}  |  {b["c1"]}  |
         -----------------------
-        2  |  {b["a2"]}  |  {b["b2"]}  |  {b["c2"]}  |
+        {bs}2{bf}  |  {b["a2"]}  |  {b["b2"]}  |  {b["c2"]}  |
         -----------------------
-        3  |  {b["a3"]}  |  {b["b3"]}  |  {b["c3"]}  |
+        {bs}3{bf}  |  {b["a3"]}  |  {b["b3"]}  |  {b["c3"]}  |
         -----------------------
         ''')
 
 first_game = Game()
 # print(first_game)
-first_game.start_game()
+first_game.play()
