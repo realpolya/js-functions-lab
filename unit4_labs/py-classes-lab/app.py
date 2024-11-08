@@ -113,7 +113,8 @@ class Game():
             count = []
             for n in range(6):
                 count.append(0)
-
+                
+            #TODO: add diagonal cases
             for key, val in b.items():
                 if "a" in key and val == turn:
                     count[0] += 1
