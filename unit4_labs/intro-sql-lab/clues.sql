@@ -13,6 +13,10 @@ population = (SELECT MIN(population) FROM countries WHERE region = 'Southern Eur
 -- work with you.
 
 -- Write SQL query here
+SELECT language FROM countrylanguages WHERE countrycode = (
+    SELECT code FROM countries WHERE region = 'Southern Europe' AND 
+    population = (SELECT MIN(population) FROM countries WHERE region = 'Southern Europe')
+);
 
 
 -- Clue #3: We have new news on the classes Carmen attended – our gumshoes tell us she's 
@@ -20,7 +24,16 @@ population = (SELECT MIN(population) FROM countries WHERE region = 'Southern Eur
 -- learning. Find out which nearby country speaks nothing but that language.
 
 -- Write SQL query here
-
+SELECT name, code, language, percentage FROM countries
+JOIN countrylanguages ON countries.code = countrylanguages.countrycode
+WHERE percentage = 100 AND language = (
+    SELECT language FROM countrylanguages WHERE countrycode = (
+        SELECT code FROM countries WHERE region = 'Southern Europe' AND 
+        population = (
+            SELECT MIN(population) FROM countries WHERE region = 'Southern Europe'
+        )
+    )
+);
 
 -- Clue #4: We're booking the first flight out – maybe we've actually got a chance to 
 -- catch her this time. There are only two cities she could be flying to in the country. 
@@ -28,7 +41,21 @@ population = (SELECT MIN(population) FROM countries WHERE region = 'Southern Eur
 -- gut on this one; find out what other city in that country she might be flying to.
 
 -- Write SQL query here
-
+SELECT cities.name AS city_name, countries.name AS country_name FROM cities
+JOIN countries ON countries.code = cities.countrycode
+WHERE countries.name != cities.name
+AND countries.name = (
+    SELECT name FROM countries
+    JOIN countrylanguages ON countries.code = countrylanguages.countrycode
+    WHERE percentage = 100 AND language = (
+        SELECT language FROM countrylanguages WHERE countrycode = (
+            SELECT code FROM countries WHERE region = 'Southern Europe' AND 
+            population = (
+                SELECT MIN(population) FROM countries WHERE region = 'Southern Europe'
+            )
+        )
+    )
+);
 
 -- Clue #5: Oh no, she pulled a switch – there are two cities with very similar names, 
 -- but in totally different parts of the globe! She's headed to South America as we speak; 
@@ -36,7 +63,7 @@ population = (SELECT MIN(population) FROM countries WHERE region = 'Southern Eur
 -- Find out the city, and do another search for what country it's in. Hurry!
 
 -- Write SQL query here
-
+SELECT * FROM cities WHERE name ILIKE '%serra%';
 
 -- Clue #6: We're close! Our South American agent says she just got a taxi at the airport, 
 -- and is headed towards the capital! Look up the country's capital, and get there pronto! 
