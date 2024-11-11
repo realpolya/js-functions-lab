@@ -7,6 +7,7 @@
 SELECT name, continent, population, region FROM countries WHERE region = 'Southern Europe' AND 
 population = (SELECT MIN(population) FROM countries WHERE region = 'Southern Europe'); 
 
+
 -- Clue #2: Now that we're here, we have insight that Carmen was seen attending 
 -- language classes in this country's officially recognized language. Check our databases 
 -- and find out what language is spoken in this country, so we can call in a translator to 
@@ -63,7 +64,43 @@ AND countries.name = (
 -- Find out the city, and do another search for what country it's in. Hurry!
 
 -- Write SQL query here
-SELECT * FROM cities WHERE name ILIKE '%serra%';
+
+SELECT cities.name AS city_name, countries.name AS country_name
+FROM cities 
+JOIN countries ON countries.code = cities.countrycode
+WHERE LEFT(cities.name, 5) = LEFT((
+    SELECT cities.name AS city_name FROM cities
+    JOIN countries ON countries.code = cities.countrycode
+    WHERE countries.name != cities.name
+    AND countries.name = (
+        SELECT name FROM countries
+        JOIN countrylanguages ON countries.code = countrylanguages.countrycode
+        WHERE percentage = 100 AND language = (
+            SELECT language FROM countrylanguages WHERE countrycode = (
+                SELECT code FROM countries WHERE region = 'Southern Europe' AND 
+                population = (
+                    SELECT MIN(population) FROM countries WHERE region = 'Southern Europe'
+                )
+            )
+        )
+    )
+), 5) AND cities.name != (
+    SELECT cities.name AS city_name FROM cities
+    JOIN countries ON countries.code = cities.countrycode
+    WHERE countries.name != cities.name
+    AND countries.name = (
+        SELECT name FROM countries
+        JOIN countrylanguages ON countries.code = countrylanguages.countrycode
+        WHERE percentage = 100 AND language = (
+            SELECT language FROM countrylanguages WHERE countrycode = (
+                SELECT code FROM countries WHERE region = 'Southern Europe' AND 
+                population = (
+                    SELECT MIN(population) FROM countries WHERE region = 'Southern Europe'
+                )
+            )
+        )
+    )
+);
 
 -- Clue #6: We're close! Our South American agent says she just got a taxi at the airport, 
 -- and is headed towards the capital! Look up the country's capital, and get there pronto! 
@@ -71,7 +108,50 @@ SELECT * FROM cities WHERE name ILIKE '%serra%';
 -- follow right behind you!
 
 -- Write SQL query here
-
+SELECT cities.name AS city_name 
+FROM cities
+JOIN countries ON countries.code = cities.countrycode
+WHERE cities.id = (
+    SELECT capital FROM countries 
+    WHERE name = (
+        SELECT countries.name AS country_name
+        FROM cities 
+        JOIN countries ON countries.code = cities.countrycode
+        WHERE LEFT(cities.name, 5) = LEFT((
+            SELECT cities.name AS city_name FROM cities
+            JOIN countries ON countries.code = cities.countrycode
+            WHERE countries.name != cities.name
+            AND countries.name = (
+                SELECT name FROM countries
+                JOIN countrylanguages ON countries.code = countrylanguages.countrycode
+                WHERE percentage = 100 AND language = (
+                    SELECT language FROM countrylanguages WHERE countrycode = (
+                        SELECT code FROM countries WHERE region = 'Southern Europe' AND 
+                        population = (
+                            SELECT MIN(population) FROM countries WHERE region = 'Southern Europe'
+                        )
+                    )
+                )
+            )
+        ), 5) AND cities.name != (
+            SELECT cities.name AS city_name FROM cities
+            JOIN countries ON countries.code = cities.countrycode
+            WHERE countries.name != cities.name
+            AND countries.name = (
+                SELECT name FROM countries
+                JOIN countrylanguages ON countries.code = countrylanguages.countrycode
+                WHERE percentage = 100 AND language = (
+                    SELECT language FROM countrylanguages WHERE countrycode = (
+                        SELECT code FROM countries WHERE region = 'Southern Europe' AND 
+                        population = (
+                            SELECT MIN(population) FROM countries WHERE region = 'Southern Europe'
+                        )
+                    )
+                )
+            )
+        )
+    )
+);
 
 -- Clue #7: She knows we're on to her – her taxi dropped her off at the international airport, 
 -- and she beat us to the boarding gates. We have one chance to catch her, we just have to know 
@@ -90,3 +170,46 @@ SELECT * FROM cities WHERE name ILIKE '%serra%';
 
 -- We're counting on you, gumshoe. Find out where she's headed, send us the info, and 
 -- we'll be sure to meet her at the gates with bells on.
+
+SELECT name FROM cities WHERE population = 91084;
+
+
+
+
+
+
+
+-- common table expressions CTE solution!
+WITH CountryOne AS (
+    SELECT code FROM countries WHERE region = 'Southern Europe' AND 
+    population = (SELECT MIN(population) FROM countries WHERE region = 'Southern Europe') 
+),
+LearnedLanguage AS (
+    SELECT language FROM countrylanguages WHERE countrycode = (SELECT code FROM CountryOne)
+),
+NextCountry AS (
+    SELECT name FROM countries
+    JOIN countrylanguages ON countries.code = countrylanguages.countrycode
+    WHERE percentage = 100 AND language = (SELECT language FROM LearnedLanguage)
+),
+NextCity AS (
+    SELECT cities.name AS city_name FROM cities
+    JOIN countries ON countries.code = cities.countrycode
+    WHERE countries.name != cities.name
+    AND countries.name = (SELECT name FROM NextCountry)
+),
+SouthAmerCountry AS (
+    SELECT countries.name AS country_name
+    FROM cities 
+    JOIN countries ON countries.code = cities.countrycode
+    WHERE LEFT(cities.name, 5) = LEFT((SELECT city_name FROM NextCity), 5)
+    AND cities.name != (SELECT city_name FROM NextCity)
+)
+
+SELECT cities.name AS city_name 
+FROM cities
+JOIN countries ON countries.code = cities.countrycode
+WHERE cities.id = (
+    SELECT capital FROM countries 
+    WHERE name = (SELECT country_name FROM SouthAmerCountry)
+);
